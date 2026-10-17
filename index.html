@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Elements of User Experience</title>
+<meta name="description" content="Los cinco planos de la experiencia de usuario de Jesse James Garrett, con el diagrama original y las etiquetas de la referencia de la Interaction Design Foundation (IxDF).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0000f2;
+  --blue-deep:#00008f;
+  --blue-10:#e6e6fe;
+  --blue-20:#ccccfc;
+  --paper:#fdfdfd;
+  --ink:#1a1a1a;
+  --muted:#616191;
+  --yellow:#f2f200;
+  --hair:rgba(0,0,242,.18);
+  --display:"Big Shoulders Display",Impact,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"IBM Plex Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;background:var(--blue);color:#fff;border-bottom:1px solid rgba(255,255,255,.2)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.logo{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{display:inline-block;width:18px;height:18px;background:
+  linear-gradient(#fff 0 0) 0 0/100% 3px no-repeat,
+  linear-gradient(#fff 0 0) 0 5px/100% 3px no-repeat,
+  linear-gradient(#fff 0 0) 0 10px/100% 3px no-repeat,
+  linear-gradient(#fff 0 0) 0 15px/100% 3px no-repeat}
+nav ul{display:flex;gap:22px;list-style:none}
+nav ul a{font-family:var(--mono);font-size:13px;text-decoration:none;opacity:.85}
+nav ul a:hover{opacity:1;text-decoration:underline}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:500;padding:11px 18px;text-decoration:none;border:1px solid currentColor;transition:background .15s,color .15s}
+.btn-solid{background:#fff;color:var(--blue);border-color:#fff}
+.btn-solid:hover{background:var(--yellow);border-color:var(--yellow)}
+.btn-ghost{color:#fff}
+.btn-ghost:hover{background:#fff;color:var(--blue)}
+
+/* ---------- hero ---------- */
+.hero{background:var(--blue);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:
+  linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none}
+.hero .wrap{position:relative;padding-top:88px;padding-bottom:96px}
+.hero .kicker{display:inline-block;border:1px solid rgba(255,255,255,.5);padding:6px 10px;margin-bottom:28px}
+.hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.86;font-size:clamp(56px,11vw,148px);letter-spacing:-.01em}
+.hero h1 span{color:var(--yellow)}
+.hero p.lead{max-width:620px;margin:28px 0 36px;font-size:18px;color:rgba(255,255,255,.85)}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.install{margin-top:48px;max-width:560px;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.15)}
+.install .bar{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.25)}
+.install code{display:block;padding:14px;font-family:var(--mono);font-size:14px;white-space:pre-wrap}
+.install code b{color:var(--yellow);font-weight:500}
+
+/* ---------- sections ---------- */
+section{padding:96px 0;border-bottom:1px solid var(--hair)}
+.sec-head{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:48px}
+.sec-head .tag{color:var(--blue)}
+h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,6vw,76px);line-height:.9;color:var(--blue)}
+h2 + .rule{font-family:var(--mono);color:var(--blue);opacity:.5;overflow:hidden;white-space:nowrap;font-size:13px}
+.sec-head p{max-width:680px;color:#2b2b2b}
+
+/* ---------- diagram ---------- */
+.diagram-shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0;border:1px solid var(--blue)}
+.diagram-shell .canvas{padding:20px;border-right:1px solid var(--blue);background:
+  linear-gradient(var(--hair) 1px,transparent 1px) 0 0/24px 24px,
+  linear-gradient(90deg,var(--hair) 1px,transparent 1px) 0 0/24px 24px;background-color:var(--paper)}
+.diagram-shell svg{width:100%;height:auto;display:block}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--blue);border-bottom:0;padding:10px 14px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--blue)}
+.seg button{font-family:var(--mono);font-size:12px;padding:7px 12px;border:0;background:transparent;color:var(--blue);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blue);color:#fff}
+svg .box rect{fill:#fff;stroke:var(--blue);stroke-width:1.5;transition:fill .15s}
+svg .box text{fill:var(--blue);font-family:var(--mono);font-size:15px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+svg .box{cursor:pointer;outline:none}
+svg .box:hover rect,svg .box:focus-visible rect{fill:var(--blue-10)}
+svg .box.active rect{fill:var(--blue)}
+svg .box.active text{fill:#fff}
+svg .plane-band{fill:var(--blue);opacity:.045}
+svg .plane-name{font-family:var(--display);font-weight:900;font-size:30px;fill:var(--blue);text-transform:uppercase;letter-spacing:.02em}
+svg .plane-num{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+svg .col-head{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--blue);text-anchor:middle;letter-spacing:.06em}
+svg .col-sub{font-family:var(--mono);font-size:11px;fill:var(--muted);text-anchor:middle}
+svg .axis{stroke:var(--blue);stroke-width:1.5;fill:none}
+svg .axis-label{font-family:var(--mono);font-size:12px;fill:var(--blue);font-weight:600;letter-spacing:.08em}
+svg .axis-small{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+svg .divider{stroke:var(--blue);stroke-dasharray:4 5;opacity:.5}
+.panel{padding:24px;display:flex;flex-direction:column;gap:14px;background:#fff}
+.panel .tag{color:var(--muted)}
+.panel h3{font-family:var(--display);font-weight:900;font-size:40px;line-height:.92;text-transform:uppercase;color:var(--blue)}
+.panel .orig{font-family:var(--mono);font-size:12px;color:var(--muted);border-top:1px solid var(--hair);padding-top:12px}
+.panel .q{font-family:var(--mono);font-size:13px;background:var(--blue-10);color:var(--blue-deep);padding:12px;border-left:3px solid var(--blue)}
+.panel ul{list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.panel ul li::before{content:"→ ";color:var(--blue);font-family:var(--mono)}
+.hint{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* ---------- planes cards ---------- */
+.planes{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--blue)}
+.plane{padding:24px 20px 28px;border-right:1px solid var(--blue);display:flex;flex-direction:column;gap:12px;min-height:340px;transition:background .15s,color .15s}
+.plane:last-child{border-right:0}
+.plane:hover{background:var(--blue);color:#fff}
+.plane:hover .tag,.plane:hover h3,.plane:hover .els li{color:#fff}
+.plane:hover .els li{border-color:rgba(255,255,255,.35)}
+.plane .tag{color:var(--blue)}
+.plane h3{font-family:var(--display);font-weight:900;font-size:44px;line-height:.9;text-transform:uppercase;color:var(--blue)}
+.plane p{font-size:14px}
+.plane .els{list-style:none;margin-top:auto;display:flex;flex-direction:column;gap:6px}
+.plane .els li{font-family:var(--mono);font-size:12px;color:var(--blue);border-top:1px solid var(--hair);padding-top:6px}
+
+/* ---------- duality ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--blue)}
+.duo > div{padding:36px}
+.duo > div:first-child{border-right:1px solid var(--blue)}
+.duo h3{font-family:var(--display);font-weight:900;font-size:40px;text-transform:uppercase;color:var(--blue);line-height:.95;margin:10px 0 14px}
+.duo .tag{color:var(--muted)}
+.duo dl{margin-top:20px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px}
+.duo dt{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;padding-top:2px}
+.duo dd{color:var(--blue);font-weight:500}
+
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--blue)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;background:var(--blue);color:#fff;font-weight:500}
+td:first-child{font-family:var(--display);font-weight:700;font-size:20px;text-transform:uppercase;color:var(--blue)}
+td.ix{color:var(--blue);font-weight:500}
+td.or{color:var(--muted);font-family:var(--mono);font-size:13px}
+tr:last-child td{border-bottom:0}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--blue)}
+.faq details{border-bottom:1px solid var(--blue)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:16px;font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;color:var(--blue)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 24px;max-width:760px}
+
+/* ---------- band + footer ---------- */
+.band{background:var(--blue);color:#fff;border:0}
+.band h2{color:#fff}
+.band .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.band p{max-width:520px;color:rgba(255,255,255,.85);margin-top:16px}
+footer{background:var(--blue-deep);color:#fff;padding:56px 0 32px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px}
+footer h4{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:12px;font-weight:500}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px}
+footer a{text-decoration:none;opacity:.9}
+footer a:hover{text-decoration:underline}
+footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;font-family:var(--mono);font-size:12px;opacity:.7}
+.big-word{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(64px,17vw,230px);line-height:.8;opacity:.12;white-space:nowrap;overflow:hidden;margin-bottom:24px}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .diagram-shell{grid-template-columns:1fr}
+  .diagram-shell .canvas{border-right:0;border-bottom:1px solid var(--blue)}
+  .planes{grid-template-columns:1fr 1fr}
+  .plane{border-bottom:1px solid var(--blue);min-height:0}
+  .plane:nth-child(2n){border-right:0}
+  .plane:last-child{grid-column:1/-1;border-bottom:0}
+  footer .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  nav ul{display:none}
+  section{padding:64px 0}
+  .hero .wrap{padding-top:56px;padding-bottom:64px}
+  .diagram-shell .canvas{padding:8px}
+  .planes{grid-template-columns:1fr}
+  .plane{border-right:0}
+  .duo{grid-template-columns:1fr}
+  .duo > div{padding:24px}
+  .duo > div:first-child{border-right:0;border-bottom:1px solid var(--blue)}
+  .faq summary{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Elements of UX</a>
+    <ul>
+      <li><a href="#diagrama">diagrama</a></li>
+      <li><a href="#planos">planos</a></li>
+      <li><a href="#dualidad">dualidad</a></li>
+      <li><a href="#etiquetas">etiquetas</a></li>
+      <li><a href="#faq">faq</a></li>
+    </ul>
+    <a class="btn btn-solid" href="#diagrama">Explorar →</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="kicker tag">// Jesse James Garrett · 2000 / 2002 / 2011</span>
+    <h1>The Elements<br>of User<br><span>Experience</span></h1>
+    <p class="lead">Cinco planos que van de lo abstracto a lo concreto. Cada decisión en un plano depende de las del plano inferior y limita las del superior. Aquí está el diagrama original, con las etiquetas de la referencia de la Interaction Design Foundation (IxDF).</p>
+    <div class="ctas">
+      <a class="btn btn-solid" href="#diagrama">Ver el diagrama</a>
+      <a class="btn btn-ghost" href="#planos">Los 5 planos</a>
+    </div>
+    <div class="install">
+      <div class="bar"><span class="tag">ux --stack</span><span class="tag">abstracto → concreto</span></div>
+      <code><b>$</b> strategy → scope → structure → skeleton → surface</code>
+    </div>
+  </div>
+</header>
+
+<!-- ============ DIAGRAM ============ -->
+<section id="diagrama">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 01 — el diagrama</span>
+      <h2>Los cinco planos</h2>
+      <div class="rule">========================================================================================================================</div>
+      <p>La estructura del diagrama de Garrett: dos columnas (producto como funcionalidad y producto como información) que se cruzan con cinco planos apilados. Toca cualquier elemento para ver su definición.</p>
+    </div>
+
+    <div class="toolbar">
+      <span class="hint">click / tab + enter sobre un elemento</span>
+      <div class="seg" role="group" aria-label="Etiquetas del diagrama">
+        <button type="button" data-labels="ixdf" aria-pressed="true">Etiquetas IxDF</button>
+        <button type="button" data-labels="orig" aria-pressed="false">Original 2000</button>
+      </div>
+    </div>
+    <div class="diagram-shell">
+      <div class="canvas">
+        <svg id="ux-diagram" viewBox="0 0 1000 800" role="img" aria-labelledby="dg-title">
+          <title id="dg-title">Diagrama de los cinco planos de la experiencia de usuario</title>
+
+          <!-- column headers -->
+          <text class="col-head" x="400" y="34" data-k="colL">PRODUCT AS FUNCTIONALITY</text>
+          <text class="col-sub"  x="400" y="54" data-k="colLs">orientado a tareas</text>
+          <text class="col-head" x="730" y="34" data-k="colR">PRODUCT AS INFORMATION</text>
+          <text class="col-sub"  x="730" y="54" data-k="colRs">orientado a la información</text>
+          <line class="divider" x1="565" y1="70" x2="565" y2="760"/>
+
+          <!-- plane bands + names (top = concreto) -->
+          <g>
+            <rect class="plane-band" x="20" y="76" width="890" height="112"/>
+            <text class="plane-num" x="30" y="100">05</text>
+            <text class="plane-name" x="30" y="140">Surface</text>
+
+            <rect class="plane-band" x="20" y="200" width="890" height="176"/>
+            <text class="plane-num" x="30" y="224">04</text>
+            <text class="plane-name" x="30" y="264">Skeleton</text>
+
+            <rect class="plane-band" x="20" y="388" width="890" height="112"/>
+            <text class="plane-num" x="30" y="412">03</text>
+            <text class="plane-name" x="30" y="452">Structure</text>
+
+            <rect class="plane-band" x="20" y="512" width="890" height="112"/>
+            <text class="plane-num" x="30" y="536">02</text>
+            <text class="plane-name" x="30" y="576">Scope</text>
+
+            <rect class="plane-band" x="20" y="636" width="890" height="136"/>
+            <text class="plane-num" x="30" y="660">01</text>
+            <text class="plane-name" x="30" y="700">Strategy</text>
+          </g>
+
+          <!-- elements -->
+          <g class="box" data-id="sensory" tabindex="0" role="button">
+            <rect x="240" y="100" width="650" height="64"/><text x="565" y="132" data-k="sensory">Sensory Design</text>
+          </g>
+
+          <g class="box" data-id="interface" tabindex="0" role="button">
+            <rect x="240" y="216" width="310" height="64"/><text x="395" y="248">Interface Design</text>
+          </g>
+          <g class="box" data-id="navigation" tabindex="0" role="button">
+            <rect x="580" y="216" width="310" height="64"/><text x="735" y="248">Navigation Design</text>
+          </g>
+          <g class="box" data-id="infodesign" tabindex="0" role="button">
+            <rect x="240" y="296" width="650" height="64"/><text x="565" y="328">Information Design</text>
+          </g>
+
+          <g class="box" data-id="interaction" tabindex="0" role="button">
+            <rect x="240" y="412" width="310" height="64"/><text x="395" y="444">Interaction Design</text>
+          </g>
+          <g class="box" data-id="ia" tabindex="0" role="button">
+            <rect x="580" y="412" width="310" height="64"/><text x="735" y="444">Information Architecture</text>
+          </g>
+
+          <g class="box" data-id="functional" tabindex="0" role="button">
+            <rect x="240" y="536" width="310" height="64"/><text x="395" y="568">Functional Specifications</text>
+          </g>
+          <g class="box" data-id="content" tabindex="0" role="button">
+            <rect x="580" y="536" width="310" height="64"/><text x="735" y="568">Content Requirements</text>
+          </g>
+
+          <g class="box" data-id="userneeds" tabindex="0" role="button">
+            <rect x="240" y="648" width="650" height="52"/><text x="565" y="674">User Needs</text>
+          </g>
+          <g class="box" data-id="objectives" tabindex="0" role="button">
+            <rect x="240" y="708" width="650" height="52"/><text x="565" y="734" data-k="objectives">Product Objectives</text>
+          </g>
+
+          <!-- axis: abstract → concrete, conception → completion -->
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#0000f2"/>
+            </marker>
+          </defs>
+          <line class="axis" x1="950" y1="760" x2="950" y2="96" marker-end="url(#arr)"/>
+          <text class="axis-label" x="950" y="82" text-anchor="middle">CONCRETE</text>
+          <text class="axis-label" x="950" y="784" text-anchor="middle">ABSTRACT</text>
+          <text class="axis-small" x="935" y="140" text-anchor="end" transform="rotate(-90 935 140)">completion</text>
+          <text class="axis-small" x="935" y="740" text-anchor="start" transform="rotate(-90 935 740)">conception</text>
+        </svg>
+      </div>
+
+      <aside class="panel" id="panel" aria-live="polite">
+        <span class="tag" id="p-tag">// plano 05 · surface</span>
+        <h3 id="p-title">Sensory Design</h3>
+        <p id="p-desc"></p>
+        <div class="q" id="p-q"></div>
+        <ul id="p-list"></ul>
+        <div class="orig" id="p-orig"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANES ============ -->
+<section id="planos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 02 — de abajo hacia arriba</span>
+      <h2>Cada plano<br>en una línea</h2>
+      <div class="rule">========================================================================================================================</div>
+      <p>Las decisiones fluyen hacia arriba: la estrategia define el alcance, el alcance la estructura, y así sucesivamente. Garrett recomienda que el trabajo en cada plano empiece antes de que termine el anterior.</p>
+    </div>
+    <div class="planes">
+      <article class="plane">
+        <span class="tag">#1 · abstracto</span>
+        <h3>Strategy</h3>
+        <p>¿Qué queremos lograr con el producto y qué quieren lograr los usuarios?</p>
+        <ul class="els"><li>User Needs</li><li>Product Objectives</li></ul>
+      </article>
+      <article class="plane">
+        <span class="tag">#2</span>
+        <h3>Scope</h3>
+        <p>La estrategia se convierte en requisitos: qué funciones y qué contenido entran.</p>
+        <ul class="els"><li>Functional Specifications</li><li>Content Requirements</li></ul>
+      </article>
+      <article class="plane">
+        <span class="tag">#3</span>
+        <h3>Structure</h3>
+        <p>Cómo encajan las piezas: cómo responde el sistema y cómo se organiza la información.</p>
+        <ul class="els"><li>Interaction Design</li><li>Information Architecture</li></ul>
+      </article>
+      <article class="plane">
+        <span class="tag">#4</span>
+        <h3>Skeleton</h3>
+        <p>La forma concreta de la estructura: dónde va cada botón, menú, bloque de texto o imagen.</p>
+        <ul class="els"><li>Interface Design</li><li>Navigation Design</li><li>Information Design</li></ul>
+      </article>
+      <article class="plane">
+        <span class="tag">#5 · concreto</span>
+        <h3>Surface</h3>
+        <p>Lo que el usuario percibe: la presentación sensorial del producto terminado.</p>
+        <ul class="els"><li>Sensory Design</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DUALITY ============ -->
+<section id="dualidad">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 03 — la dualidad</span>
+      <h2>Dos maneras de<br>ver un producto</h2>
+      <div class="rule">========================================================================================================================</div>
+      <p>Garrett partió el diagrama en dos porque la web nació como un sistema de hipertexto y se volvió una interfaz de software. Todo producto digital tiene algo de ambas, y cada plano cambia de nombre según el lado.</p>
+    </div>
+    <div class="duo">
+      <div>
+        <span class="tag">columna izquierda</span>
+        <h3>Product as<br>Functionality</h3>
+        <p>El producto como herramienta. Lo que importa son las tareas: cómo la persona llega a su objetivo paso a paso.</p>
+        <dl>
+          <dt>Scope</dt><dd>Functional Specifications</dd>
+          <dt>Structure</dt><dd>Interaction Design</dd>
+          <dt>Skeleton</dt><dd>Interface Design</dd>
+          <dt>Original</dt><dd>Web as software interface</dd>
+        </dl>
+      </div>
+      <div>
+        <span class="tag">columna derecha</span>
+        <h3>Product as<br>Information</h3>
+        <p>El producto como medio. Lo que importa es qué información ofrece, cómo se organiza y qué significa para quien la busca.</p>
+        <dl>
+          <dt>Scope</dt><dd>Content Requirements</dd>
+          <dt>Structure</dt><dd>Information Architecture</dd>
+          <dt>Skeleton</dt><dd>Navigation Design</dd>
+          <dt>Original</dt><dd>Web as hypertext system</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LABEL TABLE ============ -->
+<section id="etiquetas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 04 — referencia de etiquetas</span>
+      <h2>IxDF vs.<br>original</h2>
+      <div class="rule">========================================================================================================================</div>
+      <p>El diagrama de 2000 hablaba de "sitios web". La referencia de la IxDF usa el vocabulario de la segunda edición del libro (2011), que generaliza a cualquier producto digital.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Plano</th><th>Etiqueta IxDF</th><th>Diagrama original (2000)</th></tr></thead>
+        <tbody>
+          <tr><td>Surface</td><td class="ix">Sensory Design</td><td class="or">Visual Design</td></tr>
+          <tr><td>Skeleton</td><td class="ix">Interface Design · Navigation Design · Information Design</td><td class="or">Interface Design · Navigation Design · Information Design</td></tr>
+          <tr><td>Structure</td><td class="ix">Interaction Design · Information Architecture</td><td class="or">Interaction Design · Information Architecture</td></tr>
+          <tr><td>Scope</td><td class="ix">Functional Specifications · Content Requirements</td><td class="or">Functional Specifications · Content Requirements</td></tr>
+          <tr><td>Strategy</td><td class="ix">User Needs · Product Objectives</td><td class="or">User Needs · Site Objectives</td></tr>
+          <tr><td>Columnas</td><td class="ix">Product as Functionality / Product as Information</td><td class="or">Web as software interface / Web as hypertext system</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 05 — preguntas</span>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>¿Hay que terminar un plano antes de pasar al siguiente?</summary>
+        <p>No. Garrett lo dice explícito: el trabajo en cada plano debe empezar antes de que termine el plano inferior, y terminar después. Es un modelo de dependencias, no una cascada. Las decisiones de arriba también pueden obligarte a revisar las de abajo.</p>
+      </details>
+      <details>
+        <summary>¿Por qué "Sensory" y no "Visual" Design?</summary>
+        <p>En la segunda edición el plano superficial se amplió para incluir todos los sentidos: vista, oído, tacto (háptica) e incluso movimiento. La experiencia de un producto no es solo lo que se ve.</p>
+      </details>
+      <details>
+        <summary>¿Por qué Information Design aparece en ambas columnas?</summary>
+        <p>Porque presentar la información para que se entienda es necesario tanto en una interfaz de tareas (un formulario, un panel) como en un sistema de contenido (una página, un menú). Por eso cruza todo el plano del esqueleto.</p>
+      </details>
+      <details>
+        <summary>¿Sigue siendo útil hoy?</summary>
+        <p>Sí, como vocabulario compartido y como herramienta de diagnóstico: cuando algo no funciona en la superficie, el diagrama te ayuda a ubicar en qué plano está realmente el problema.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div>
+      <h2>De lo abstracto<br>a lo concreto</h2>
+      <p>Basado en el diagrama de Jesse James Garrett (jjg.net, 2000) y en la referencia de la Interaction Design Foundation.</p>
+    </div>
+    <a class="btn btn-solid" href="#top">↑ Volver arriba</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big-word">Elements</div>
+    <div class="cols">
+      <div>
+        <h4>Proyecto</h4>
+        <p style="font-size:14px;opacity:.85;max-width:320px">Sitio de estudio sobre los cinco planos de la experiencia de usuario. El contenido explicativo es un resumen propio; el modelo es de Jesse James Garrett.</p>
+      </div>
+      <div>
+        <h4>Planos</h4>
+        <ul><li><a href="#diagrama">Diagrama</a></li><li><a href="#planos">Los 5 planos</a></li><li><a href="#dualidad">Dualidad</a></li></ul>
+      </div>
+      <div>
+        <h4>Fuentes</h4>
+        <ul>
+          <li><a href="http://www.jjg.net/elements/pdf/elements.pdf">Diagrama original (PDF)</a></li>
+          <li><a href="https://ixdf.org/literature/topics/ux-design">Interaction Design Foundation</a></li>
+          <li><a href="http://www.jjg.net/elements/">jjg.net/elements</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Libro</h4>
+        <ul><li>The Elements of User Experience</li><li>New Riders, 2002 · 2ª ed. 2011</li></ul>
+      </div>
+    </div>
+    <div class="legal"><span>Diagrama © Jesse James Garrett</span><span>// hecho para aprender · 2026</span></div>
+  </div>
+</footer>
+
+<script>
+const D = {
+  sensory:{plane:"05 · surface",title:"Sensory Design",orig:"Original 2000: Visual Design",
+    desc:"El tratamiento sensorial de todo lo que está debajo: color, tipografía, imagen, sonido, movimiento. Es lo primero que el usuario percibe y lo último que se decide.",
+    q:"¿Cómo se ve, se oye y se siente el producto?",
+    list:["Contraste y uniformidad","Paletas de color y tipografía","Consistencia interna y externa","Guías de estilo"]},
+  interface:{plane:"04 · skeleton · funcionalidad",title:"Interface Design",orig:"Original 2000: Interface Design",
+    desc:"Seleccionar y acomodar los elementos de interfaz (botones, campos, controles) para que la persona pueda usar la funcionalidad del sistema.",
+    q:"¿Qué control uso y dónde lo pongo para que la tarea sea fácil?",
+    list:["Checkboxes, radios, campos de texto","Valores por defecto","Wireframes"]},
+  navigation:{plane:"04 · skeleton · información",title:"Navigation Design",orig:"Original 2000: Navigation Design",
+    desc:"Diseñar los elementos de pantalla que permiten moverse por la arquitectura de información.",
+    q:"¿Cómo sabe el usuario dónde está y a dónde puede ir?",
+    list:["Navegación global, local y contextual","Breadcrumbs y mapas de sitio","Índices"]},
+  infodesign:{plane:"04 · skeleton · ambas columnas",title:"Information Design",orig:"Original 2000: Information Design",
+    desc:"Presentar la información de forma que facilite su comprensión. Cruza ambas columnas porque aplica igual a interfaces de tareas y a sistemas de contenido.",
+    q:"¿Cómo agrupo y presento esto para que se entienda a la primera?",
+    list:["Agrupación y jerarquía","Señalización (wayfinding)","Visualización de datos"]},
+  interaction:{plane:"03 · structure · funcionalidad",title:"Interaction Design",orig:"Original 2000: Interaction Design",
+    desc:"Definir cómo se comporta el sistema en respuesta al usuario: flujos de tareas, estados y manejo de errores.",
+    q:"Cuando el usuario hace X, ¿qué hace el sistema?",
+    list:["Modelos conceptuales","Flujos de tarea","Prevención y recuperación de errores"]},
+  ia:{plane:"03 · structure · información",title:"Information Architecture",orig:"Original 2000: Information Architecture",
+    desc:"Organizar el espacio de información: categorías, jerarquías y nombres, para que el contenido se encuentre y se entienda.",
+    q:"¿Cómo se organiza y se nombra el contenido?",
+    list:["Esquemas de organización","Jerarquías, matrices, secuencias","Nomenclatura y taxonomías"]},
+  functional:{plane:"02 · scope · funcionalidad",title:"Functional Specifications",orig:"Original 2000: Functional Specifications",
+    desc:"El conjunto de funciones que el producto debe ofrecer, descrito con suficiente detalle para construirlo.",
+    q:"¿Qué funciones incluimos (y cuáles no)?",
+    list:["Requisitos priorizados","Escenarios de uso","Especificación funcional"]},
+  content:{plane:"02 · scope · información",title:"Content Requirements",orig:"Original 2000: Content Requirements",
+    desc:"Definir los elementos de contenido necesarios para satisfacer las necesidades de los usuarios: textos, imágenes, audio, video.",
+    q:"¿Qué contenido necesitamos, en qué formato y quién lo mantiene?",
+    list:["Inventario de contenido","Volumen y frecuencia de actualización","Responsables"]},
+  userneeds:{plane:"01 · strategy",title:"User Needs",orig:"Original 2000: User Needs",
+    desc:"Lo que las personas quieren lograr con el producto, identificado mediante investigación de usuarios.",
+    q:"¿Quién usa esto y qué necesita?",
+    list:["Investigación de usuarios","Segmentación","Personas"]},
+  objectives:{plane:"01 · strategy",title:"Product Objectives",orig:"Original 2000: Site Objectives",
+    desc:"Los objetivos de negocio, creativos u organizacionales que el producto debe cumplir.",
+    q:"¿Qué queremos lograr con este producto?",
+    list:["Metas de negocio","Identidad de marca","Métricas de éxito"]}
+};
+const ORIG = {sensory:"Visual Design",objectives:"Site Objectives",colL:"WEB AS SOFTWARE INTERFACE",colR:"WEB AS HYPERTEXT SYSTEM"};
+const IXDF = {sensory:"Sensory Design",objectives:"Product Objectives",colL:"PRODUCT AS FUNCTIONALITY",colR:"PRODUCT AS INFORMATION"};
+let mode = "ixdf";
+
+const $ = id => document.getElementById(id);
+function show(id){
+  const d = D[id];
+  document.querySelectorAll("#ux-diagram .box").forEach(b => b.classList.toggle("active", b.dataset.id === id));
+  $("p-tag").textContent = "// plano " + d.plane;
+  $("p-title").textContent = mode === "orig" && ORIG[id] ? ORIG[id] : d.title;
+  $("p-desc").textContent = d.desc;
+  $("p-q").textContent = d.q;
+  $("p-list").innerHTML = d.list.map(x => "<li>" + x + "</li>").join("");
+  $("p-orig").textContent = mode === "orig" ? "Etiqueta IxDF: " + d.title : d.orig;
+}
+let current = "sensory";
+document.querySelectorAll("#ux-diagram .box").forEach(b => {
+  b.addEventListener("click", () => { current = b.dataset.id; show(current); });
+  b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); current = b.dataset.id; show(current); } });
+});
+document.querySelectorAll(".seg button").forEach(btn => btn.addEventListener("click", () => {
+  mode = btn.dataset.labels;
+  document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  const L = mode === "orig" ? ORIG : IXDF;
+  document.querySelectorAll("#ux-diagram [data-k]").forEach(t => { if (L[t.dataset.k]) t.textContent = L[t.dataset.k]; });
+  show(current);
+}));
+show(current);
+</script>
+</body>
+</html>
