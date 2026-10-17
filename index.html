@@ -121,6 +121,21 @@ svg .divider{stroke:var(--blue);stroke-dasharray:4 5;opacity:.5}
 .plane .els{list-style:none;margin-top:auto;display:flex;flex-direction:column;gap:6px}
 .plane .els li{font-family:var(--mono);font-size:12px;color:var(--blue);border-top:1px solid var(--hair);padding-top:6px}
 
+
+/* ---------- building analogy ---------- */
+.build{display:flex;flex-direction:column-reverse;border:1px solid var(--blue)}
+.floor{display:grid;grid-template-columns:200px 1fr 1fr;border-top:1px solid var(--blue)}
+.build .floor:first-child{border-top:0}
+.floor > *{padding:22px 24px}
+.floor .lvl{background:var(--blue);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.floor .lvl b{font-family:var(--display);font-weight:900;font-size:34px;text-transform:uppercase;line-height:.9}
+.floor .lvl span{font-family:var(--mono);font-size:11px;opacity:.75}
+.floor .who{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.floor .bld{border-right:1px solid var(--hair)}
+.floor .ux{color:var(--blue);font-weight:500}
+.floor:nth-child(1) .lvl{background:var(--blue-deep)}
+@media (max-width:760px){.floor{grid-template-columns:1fr}.floor .bld{border-right:0;border-bottom:1px solid var(--hair)}}
+
 /* ---------- duality ---------- */
 .duo{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--blue)}
 .duo > div{padding:36px}
@@ -197,6 +212,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
     <ul>
       <li><a href="#diagrama">diagrama</a></li>
       <li><a href="#planos">planos</a></li>
+      <li><a href="#edificio">edificio</a></li>
       <li><a href="#dualidad">dualidad</a></li>
       <li><a href="#etiquetas">etiquetas</a></li>
       <li><a href="#faq">faq</a></li>
@@ -306,7 +322,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
             <rect x="240" y="648" width="650" height="52"/><text x="565" y="674">User Needs</text>
           </g>
           <g class="box" data-id="objectives" tabindex="0" role="button">
-            <rect x="240" y="708" width="650" height="52"/><text x="565" y="734" data-k="objectives">Product Objectives</text>
+            <rect x="240" y="708" width="650" height="52"/><text x="565" y="734" data-k="objectives">Business Objectives</text>
           </g>
 
           <!-- axis: abstract → concrete, conception → completion -->
@@ -348,33 +364,72 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
       <article class="plane">
         <span class="tag">#1 · abstracto</span>
         <h3>Strategy</h3>
-        <p>¿Qué queremos lograr con el producto y qué quieren lograr los usuarios?</p>
-        <ul class="els"><li>User Needs</li><li>Product Objectives</li></ul>
+        <p>El plano más abstracto. Aquí se identifican los objetivos de negocio y las necesidades de los usuarios.</p>
+        <ul class="els"><li>User Needs</li><li>Business Objectives</li></ul>
       </article>
       <article class="plane">
         <span class="tag">#2</span>
         <h3>Scope</h3>
-        <p>La estrategia se convierte en requisitos: qué funciones y qué contenido entran.</p>
+        <p>Las decisiones de la estrategia definen la propuesta de valor, el producto y las funciones que cumplen esos objetivos y necesidades.</p>
         <ul class="els"><li>Functional Specifications</li><li>Content Requirements</li></ul>
       </article>
       <article class="plane">
         <span class="tag">#3</span>
         <h3>Structure</h3>
-        <p>Cómo encajan las piezas: cómo responde el sistema y cómo se organiza la información.</p>
+        <p>Cómo interactúa el usuario con las funciones del producto y cómo se mueve entre ellas.</p>
         <ul class="els"><li>Interaction Design</li><li>Information Architecture</li></ul>
       </article>
       <article class="plane">
         <span class="tag">#4</span>
         <h3>Skeleton</h3>
-        <p>La forma concreta de la estructura: dónde va cada botón, menú, bloque de texto o imagen.</p>
+        <p>Aquí la interfaz del producto se vuelve visible.</p>
         <ul class="els"><li>Interface Design</li><li>Navigation Design</li><li>Information Design</li></ul>
       </article>
       <article class="plane">
         <span class="tag">#5 · concreto</span>
         <h3>Surface</h3>
-        <p>Lo que el usuario percibe: la presentación sensorial del producto terminado.</p>
+        <p>El plano más visible y concreto: aquí se coloca la capa de presentación.</p>
         <ul class="els"><li>Sensory Design</li></ul>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUILDING ============ -->
+<section id="edificio">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">// 03 — la analogía del edificio</span>
+      <h2>Construir un<br>edificio</h2>
+      <div class="rule">========================================================================================================================</div>
+      <p>La IxDF explica el marco con la construcción de un edificio. Se lee de abajo hacia arriba: del terreno y el porqué, hasta el color de las paredes.</p>
+    </div>
+    <div class="build">
+      <div class="floor">
+        <div class="lvl"><span>01 · cimientos</span><b>Strategy</b></div>
+        <div class="bld"><div class="who">tasadores + abogados</div>¿Para qué construir: vivienda o uso comercial? ¿Quién lo rentaría? ¿La ubicación conviene a compradores o inquilinos?</div>
+        <div class="ux"><div class="who">en UX</div>Identificar los objetivos de negocio y las necesidades de los usuarios.</div>
+      </div>
+      <div class="floor">
+        <div class="lvl"><span>02 · el terreno</span><b>Scope</b></div>
+        <div class="bld"><div class="who">inspector del terreno</div>Evalúa qué se puede construir: casa, departamentos, oficinas o un centro comercial.</div>
+        <div class="ux"><div class="who">en UX</div>Definir la propuesta de valor, el producto y las funciones que cumplen esos objetivos y necesidades.</div>
+      </div>
+      <div class="floor">
+        <div class="lvl"><span>03 · los planos</span><b>Structure</b></div>
+        <div class="bld"><div class="who">arquitecto</div>Planos con entradas, salidas, cuartos, pasillos, baños, elevadores y escaleras.</div>
+        <div class="ux"><div class="who">en UX</div>Cómo interactúa el usuario con las funciones del producto y cómo navega entre ellas.</div>
+      </div>
+      <div class="floor">
+        <div class="lvl"><span>04 · la maqueta</span><b>Skeleton</b></div>
+        <div class="bld"><div class="who">arquitecto + constructor</div>Bocetos, modelos 3D de interiores y una muestra a escala real amueblada.</div>
+        <div class="ux"><div class="who">en UX</div>La interfaz del producto se vuelve visible.</div>
+      </div>
+      <div class="floor">
+        <div class="lvl"><span>05 · acabados</span><b>Surface</b></div>
+        <div class="bld"><div class="who">diseñador de interiores</div>Color de las paredes, pisos, muebles y accesorios de cada cuarto.</div>
+        <div class="ux"><div class="who">en UX</div>Se coloca la capa de presentación: lo más visible y concreto.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -383,7 +438,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 <section id="dualidad">
   <div class="wrap">
     <div class="sec-head">
-      <span class="tag">// 03 — la dualidad</span>
+      <span class="tag">// 04 — la dualidad</span>
       <h2>Dos maneras de<br>ver un producto</h2>
       <div class="rule">========================================================================================================================</div>
       <p>Garrett partió el diagrama en dos porque la web nació como un sistema de hipertexto y se volvió una interfaz de software. Todo producto digital tiene algo de ambas, y cada plano cambia de nombre según el lado.</p>
@@ -419,7 +474,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 <section id="etiquetas">
   <div class="wrap">
     <div class="sec-head">
-      <span class="tag">// 04 — referencia de etiquetas</span>
+      <span class="tag">// 05 — referencia de etiquetas</span>
       <h2>IxDF vs.<br>original</h2>
       <div class="rule">========================================================================================================================</div>
       <p>El diagrama de 2000 hablaba de "sitios web". La referencia de la IxDF usa el vocabulario de la segunda edición del libro (2011), que generaliza a cualquier producto digital.</p>
@@ -432,7 +487,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
           <tr><td>Skeleton</td><td class="ix">Interface Design · Navigation Design · Information Design</td><td class="or">Interface Design · Navigation Design · Information Design</td></tr>
           <tr><td>Structure</td><td class="ix">Interaction Design · Information Architecture</td><td class="or">Interaction Design · Information Architecture</td></tr>
           <tr><td>Scope</td><td class="ix">Functional Specifications · Content Requirements</td><td class="or">Functional Specifications · Content Requirements</td></tr>
-          <tr><td>Strategy</td><td class="ix">User Needs · Product Objectives</td><td class="or">User Needs · Site Objectives</td></tr>
+          <tr><td>Strategy</td><td class="ix">User Needs · Business Objectives</td><td class="or">User Needs · Site Objectives</td></tr>
           <tr><td>Columnas</td><td class="ix">Product as Functionality / Product as Information</td><td class="or">Web as software interface / Web as hypertext system</td></tr>
         </tbody>
       </table>
@@ -444,7 +499,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
 <section id="faq">
   <div class="wrap">
     <div class="sec-head">
-      <span class="tag">// 05 — preguntas</span>
+      <span class="tag">// 06 — preguntas</span>
       <h2>FAQ</h2>
     </div>
     <div class="faq">
@@ -488,7 +543,7 @@ footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
       </div>
       <div>
         <h4>Planos</h4>
-        <ul><li><a href="#diagrama">Diagrama</a></li><li><a href="#planos">Los 5 planos</a></li><li><a href="#dualidad">Dualidad</a></li></ul>
+        <ul><li><a href="#diagrama">Diagrama</a></li><li><a href="#planos">Los 5 planos</a></li><li><a href="#edificio">Analogía del edificio</a></li><li><a href="#dualidad">Dualidad</a></li></ul>
       </div>
       <div>
         <h4>Fuentes</h4>
@@ -545,13 +600,13 @@ const D = {
     desc:"Lo que las personas quieren lograr con el producto, identificado mediante investigación de usuarios.",
     q:"¿Quién usa esto y qué necesita?",
     list:["Investigación de usuarios","Segmentación","Personas"]},
-  objectives:{plane:"01 · strategy",title:"Product Objectives",orig:"Original 2000: Site Objectives",
+  objectives:{plane:"01 · strategy",title:"Business Objectives",orig:"Original 2000: Site Objectives",
     desc:"Los objetivos de negocio, creativos u organizacionales que el producto debe cumplir.",
     q:"¿Qué queremos lograr con este producto?",
     list:["Metas de negocio","Identidad de marca","Métricas de éxito"]}
 };
 const ORIG = {sensory:"Visual Design",objectives:"Site Objectives",colL:"WEB AS SOFTWARE INTERFACE",colR:"WEB AS HYPERTEXT SYSTEM"};
-const IXDF = {sensory:"Sensory Design",objectives:"Product Objectives",colL:"PRODUCT AS FUNCTIONALITY",colR:"PRODUCT AS INFORMATION"};
+const IXDF = {sensory:"Sensory Design",objectives:"Business Objectives",colL:"PRODUCT AS FUNCTIONALITY",colR:"PRODUCT AS INFORMATION"};
 let mode = "ixdf";
 
 const $ = id => document.getElementById(id);
