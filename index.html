@@ -20,506 +20,345 @@
   --yellow:#f2f200;
   --green:#0a7a3d;
   --red:#b3261e;
-  --wire:#d9d9e8;
+  --wire:#dcdcea;
+  --wire-ink:#55557a;
   --hair:rgba(0,0,242,.18);
   --display:"Big Shoulders Display",Impact,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --sans:"IBM Plex Sans",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
 a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;width:100%}
 
-/* nav */
-nav{position:sticky;top:0;z-index:20;background:var(--blue);color:#fff;border-bottom:1px solid rgba(255,255,255,.2)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
-.logo{font-family:var(--display);font-weight:900;font-size:22px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
-.logo i{display:inline-block;width:18px;height:18px;background:
+/* top bar */
+header{background:var(--blue);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.task{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.task h1{font-family:var(--display);font-weight:900;font-size:28px;text-transform:uppercase;line-height:1;display:flex;align-items:center;gap:10px}
+.task h1 i{display:inline-block;width:18px;height:18px;background:
   linear-gradient(#fff 0 0) 0 0/100% 3px no-repeat,linear-gradient(#fff 0 0) 0 5px/100% 3px no-repeat,
   linear-gradient(#fff 0 0) 0 10px/100% 3px no-repeat,linear-gradient(#fff 0 0) 0 15px/100% 3px no-repeat}
-nav ul{display:flex;gap:20px;list-style:none}
-nav ul a{font-family:var(--mono);font-size:13px;text-decoration:none;opacity:.85}
-nav ul a:hover{opacity:1;text-decoration:underline}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:500;padding:11px 18px;text-decoration:none;border:1px solid currentColor;transition:background .15s,color .15s}
-.btn-solid{background:#fff;color:var(--blue);border-color:#fff}
-.btn-solid:hover{background:var(--yellow);border-color:var(--yellow)}
+.task span{font-family:var(--mono);font-size:12px;border:1px solid rgba(255,255,255,.45);padding:4px 8px}
+.credit{font-family:var(--mono);font-size:12px;opacity:.75}
 
-/* hero */
-.hero{background:var(--blue);color:#fff;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background-image:
-  linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
-  background-size:48px 48px;pointer-events:none}
-.hero .wrap{position:relative;padding-top:72px;padding-bottom:80px}
-.hero .sub{font-family:var(--mono);font-size:14px;opacity:.8;margin-bottom:20px}
-.hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.86;font-size:clamp(64px,13vw,170px)}
-.hero h1 span{color:var(--yellow)}
-.brief{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.4)}
-.brief > div{padding:18px 20px;border-right:1px solid rgba(255,255,255,.4)}
-.brief > div:last-child{border-right:0}
-.brief b{display:block;font-family:var(--mono);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-bottom:6px}
-.brief p{font-size:15px}
-.brief .big{font-family:var(--display);font-weight:700;font-size:26px;line-height:1;text-transform:uppercase}
-
-/* section shell */
-section{padding:88px 0;border-bottom:1px solid var(--hair)}
-h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,6vw,76px);line-height:.9;color:var(--blue)}
-.intro{max-width:640px;margin:14px 0 40px;color:#2b2b2b}
-
-/* diagram */
-.diagram-shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;border:1px solid var(--blue)}
-.canvas{padding:20px;border-right:1px solid var(--blue);background:
+/* main layout */
+main{flex:1;padding:28px 0 32px}
+.shell{display:grid;grid-template-columns:minmax(0,1fr) 470px;border:1px solid var(--blue)}
+.canvas{padding:18px;border-right:1px solid var(--blue);background:
   linear-gradient(var(--hair) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,var(--hair) 1px,transparent 1px) 0 0/24px 24px;background-color:var(--paper)}
 .canvas svg{width:100%;height:auto;display:block}
+.req{margin-top:14px;font-size:13px;color:#2b2b2b;border-top:1px solid var(--hair);padding-top:12px}
+.req b{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-right:6px}
+
+/* svg */
 svg .box rect{fill:#fff;stroke:var(--blue);stroke-width:1.5;transition:fill .15s}
-svg .box text{fill:var(--blue);font-family:var(--mono);font-size:15px;font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+svg .box .es{fill:var(--blue);font-family:var(--mono);font-size:15px;font-weight:600;text-anchor:middle}
+svg .box .en{fill:var(--muted);font-family:var(--mono);font-size:11px;text-anchor:middle}
+svg .box text{pointer-events:none}
 svg .box{cursor:pointer;outline:none}
 svg .box:hover rect,svg .box:focus-visible rect{fill:var(--blue-10)}
-svg .box.active rect{fill:var(--blue)}
-svg .box.active text{fill:#fff}
-svg .plane-band{fill:var(--blue);opacity:.045}
-svg .plane-name{font-family:var(--display);font-weight:900;font-size:30px;fill:var(--blue);text-transform:uppercase}
-svg .plane-es{font-family:var(--mono);font-size:12px;fill:var(--muted)}
-svg .col-head{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--blue);text-anchor:middle;letter-spacing:.06em}
+svg .box.on rect{fill:var(--blue)}
+svg .box.on .es{fill:#fff}
+svg .box.on .en{fill:rgba(255,255,255,.75)}
+svg .band{fill:var(--blue);opacity:.045;transition:opacity .15s}
+svg .band.on{opacity:.13}
+svg .pname{font-family:var(--display);font-weight:900;font-size:30px;fill:var(--blue);text-transform:uppercase}
+svg .pen{font-family:var(--mono);font-size:12px;fill:var(--muted)}
+svg .pnum{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+svg .col-es{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--blue);text-anchor:middle;letter-spacing:.05em}
+svg .col-en{font-family:var(--mono);font-size:11px;fill:var(--muted);text-anchor:middle}
 svg .axis{stroke:var(--blue);stroke-width:1.5;fill:none}
 svg .axis-label{font-family:var(--mono);font-size:12px;fill:var(--blue);font-weight:600;letter-spacing:.08em}
 svg .divider{stroke:var(--blue);stroke-dasharray:4 5;opacity:.5}
-.panel{padding:28px 24px;display:flex;flex-direction:column;gap:14px;background:#fff}
-.panel .num{font-family:var(--display);font-weight:900;font-size:64px;line-height:.8;color:var(--blue-10);-webkit-text-stroke:1.5px var(--blue)}
-.panel h3{font-family:var(--display);font-weight:900;font-size:44px;line-height:.9;text-transform:uppercase;color:var(--blue)}
-.panel .el{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.panel p{font-size:15px}
-.panel a{font-family:var(--mono);font-size:13px;color:var(--blue);margin-top:auto}
 
-/* plane sections */
-.plane-sec{display:grid;grid-template-columns:360px minmax(0,1fr);gap:48px;align-items:start}
-.plane-head .n{font-family:var(--display);font-weight:900;font-size:120px;line-height:.75;color:transparent;-webkit-text-stroke:2px var(--blue);display:block;margin-bottom:12px}
-.plane-head .en{font-family:var(--mono);font-size:14px;color:var(--muted);margin-top:8px}
-.plane-head p{margin-top:20px;font-size:17px}
-.plane-head .done{margin-top:20px;font-family:var(--mono);font-size:13px;border-left:3px solid var(--blue);padding:10px 12px;background:var(--blue-5);color:var(--blue-deep)}
-.visual{border:1px solid var(--blue);background:#fff;padding:28px}
-.alt{background:var(--blue-5)}
+/* panel */
+.panel{background:#fff;display:flex;flex-direction:column}
+.p-head{padding:22px 24px 18px;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:end}
+.p-num{grid-row:span 2;font-family:var(--display);font-weight:900;font-size:76px;line-height:.78;color:transparent;-webkit-text-stroke:2px var(--blue)}
+.p-head h2{font-family:var(--display);font-weight:900;font-size:46px;line-height:.85;text-transform:uppercase;color:var(--blue)}
+.p-en{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.p-body{padding:20px 24px;display:flex;flex-direction:column;gap:18px;flex:1}
+.p-text{font-size:15px}
+.p-nav{display:flex;border-top:1px solid var(--blue)}
+.p-nav button{flex:1;font-family:var(--mono);font-size:12px;padding:12px;background:#fff;color:var(--blue);border:0;cursor:pointer}
+.p-nav button:first-child{border-right:1px solid var(--blue)}
+.p-nav button:hover:not(:disabled){background:var(--blue);color:#fff}
+.p-nav button:disabled{opacity:.3;cursor:default}
 
-/* strategy visual */
-.goal{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:20px}
-.who{display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center}
-.who .av{width:72px;height:72px;border-radius:50%;background:var(--blue);position:relative}
-.who .av::before{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#fff;left:23px;top:12px}
-.who .av::after{content:"";position:absolute;width:44px;height:20px;border-radius:22px 22px 0 0;background:#fff;left:14px;top:44px}
-.arrow{font-family:var(--mono);font-size:28px;color:var(--blue)}
-.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.oc{border:1.5px solid var(--blue);padding:16px;display:flex;flex-direction:column;gap:8px}
-.oc .ic{width:40px;height:40px;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:20px;font-weight:700}
-.oc b{font-family:var(--display);font-size:26px;text-transform:uppercase;color:var(--blue);line-height:1}
-.oc span{font-size:13px;color:#444}
+/* visuals */
+.vis{border:1px solid var(--blue);padding:16px;background:var(--blue-5)}
+.vis-label{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:10px}
 
-/* scope visual */
-.scope{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.scope h4{font-family:var(--mono);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
-.chips{display:flex;flex-direction:column;gap:8px}
-.chip{border:1.5px solid var(--blue);padding:10px 12px;font-family:var(--mono);font-size:13px;color:var(--blue);display:flex;gap:10px;align-items:center;background:#fff}
-.chip::before{content:"✓";display:grid;place-items:center;width:20px;height:20px;background:var(--blue);color:#fff;font-size:12px;flex:none}
-.file-ic{display:inline-block;width:16px;height:20px;border:1.5px solid currentColor;position:relative;flex:none}
+.outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.oc{border:1.5px solid var(--blue);background:#fff;padding:12px 10px;display:flex;flex-direction:column;gap:6px}
+.oc .ic{width:32px;height:32px;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:16px;font-weight:700}
+.oc b{font-family:var(--display);font-size:22px;text-transform:uppercase;color:var(--blue);line-height:1}
+.oc span{font-size:12px;color:#444;line-height:1.3}
 
-/* structure visual */
-.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
-.step{position:relative;padding:0 6px;text-align:center}
-.step .dot{width:48px;height:48px;margin:0 auto 10px;border:2px solid var(--blue);background:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:24px;color:var(--blue);position:relative;z-index:1}
-.step.key .dot{background:var(--blue);color:#fff}
-.step:not(:last-child)::after{content:"";position:absolute;top:24px;left:calc(50% + 24px);right:calc(-50% + 24px);border-top:2px solid var(--blue)}
-.step span{font-size:13px;line-height:1.3;display:block}
-.err{margin-top:28px;display:flex;align-items:center;gap:14px;border:1.5px dashed var(--red);padding:12px 16px;color:var(--red);font-size:14px}
-.err b{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-.err .loop{font-family:var(--mono);font-size:20px}
+.sgroup + .sgroup{margin-top:12px}
+.sgroup h4{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--blue);background:#fff;padding:5px 9px;font-family:var(--mono);font-size:12px;color:var(--blue);display:flex;gap:6px;align-items:center}
+.chip::before{content:"✓";font-weight:700}
 
-/* skeleton visual (wireframe) */
-.devices{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:24px;align-items:end}
-.screen{border:2px solid #9a9ab8;background:#fff;position:relative}
-.screen .bar{height:22px;border-bottom:2px solid #9a9ab8;display:flex;gap:5px;align-items:center;padding:0 8px}
-.screen .bar i{width:7px;height:7px;border-radius:50%;background:#c4c4d8}
-.wf{padding:16px;display:grid;gap:10px}
-.wf .row{display:flex;gap:10px}
-.blk{background:var(--wire);min-height:18px;position:relative;font-family:var(--mono);font-size:11px;color:#55557a;padding:6px 8px;display:flex;align-items:center;gap:6px}
-.blk.out{background:#fff;border:2px dashed #9a9ab8;justify-content:center;min-height:70px}
-.blk.btn-w{background:#55557a;color:#fff;justify-content:center;width:140px}
-.blk.ok{background:#fff;border:2px solid #55557a}
-.pin{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-size:10px;font-weight:700;flex:none}
-.phone{border:2px solid #9a9ab8;border-radius:18px;padding:16px 10px;background:#fff}
-.phone .wf{padding:0;gap:8px}
-.phone .blk{font-size:10px}
-.legend{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px;font-size:13px}
+.flow{list-style:none;display:flex;flex-direction:column}
+.flow li{display:flex;align-items:center;gap:12px;position:relative;padding-bottom:10px;font-size:14px}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:15px;top:32px;bottom:0;border-left:2px solid var(--blue)}
+.flow .d{width:32px;height:32px;flex:none;border:2px solid var(--blue);background:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:18px;color:var(--blue)}
+.flow .key .d{background:var(--blue);color:#fff}
+.err{margin-top:6px;display:flex;gap:10px;align-items:center;border:1.5px dashed var(--red);background:#fff;padding:10px 12px;color:var(--red);font-size:13px}
+.err span{font-size:20px;font-family:var(--mono)}
+
+.wf{background:#fff;border:2px solid #9a9ab8;border-radius:6px;padding:12px;display:grid;gap:7px}
+.wf .row{display:flex;gap:7px}
+.blk{background:var(--wire);font-family:var(--mono);font-size:11px;color:var(--wire-ink);padding:6px 8px;display:flex;align-items:center;gap:6px;min-height:28px}
+.blk.tall{min-height:44px}
+.blk.out{background:#fff;border:2px dashed #9a9ab8;justify-content:center;min-height:50px}
+.blk.cta{background:var(--wire-ink);color:#fff;justify-content:center;width:150px}
+.blk.ok{background:#fff;border:2px solid var(--wire-ink)}
+.pin{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--blue);color:#fff;font-size:10px;font-weight:700;flex:none}
+.legend{margin-top:10px;display:flex;flex-direction:column;gap:5px;font-size:12px}
 .legend div{display:flex;gap:8px;align-items:center}
-.legend .pin{width:auto;border-radius:9px;padding:0 7px}
 
-/* surface visual (final UI) */
-.ui{border:1px solid #c9c9d6;background:#fff;font-family:var(--sans)}
-.ui-top{background:#2d3b45;color:#fff;padding:10px 16px;font-size:14px;font-weight:600}
-.ui-body{padding:20px;display:grid;gap:14px}
-.ui h5{font-size:22px;font-weight:600;color:#1a1a1a}
-.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:15px;color:#2b2b2b}
+.ui{background:#fff;border:1px solid #c9c9d6}
+.ui-top{background:#2d3b45;color:#fff;padding:8px 12px;font-size:13px;font-weight:600}
+.ui-body{padding:14px;display:grid;gap:10px}
+.ui h5{font-size:18px;font-weight:600}
+.meta{font-size:14px;color:#2b2b2b}
 .meta b{font-weight:600}
-.ui .rub{font-size:15px;color:var(--blue);text-decoration:underline}
-.file{display:flex;align-items:center;gap:10px;border:1px solid #c9c9d6;padding:10px 12px;font-size:15px}
-.file .file-ic{color:#555}
-.ui .send{justify-self:start;background:var(--blue);color:#fff;border:0;font:600 16px var(--sans);padding:12px 22px;cursor:pointer}
-.msg{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;font-size:15px;border:2px solid}
-.msg .mi{flex:none;width:24px;height:24px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
-.msg.e{border-color:var(--red);color:var(--red);background:#fdf1f0}
+.rub{font-size:14px;color:var(--blue);text-decoration:underline}
+.file{display:flex;align-items:center;gap:8px;border:1px solid #c9c9d6;padding:8px 10px;font-size:14px}
+.file-ic{display:inline-block;width:13px;height:16px;border:1.5px solid #555;flex:none}
+.send{justify-self:start;background:var(--blue);color:#fff;border:0;font:600 15px var(--sans);padding:10px 18px}
+.msg{display:flex;gap:8px;align-items:flex-start;padding:9px 10px;font-size:13px;border:2px solid}
+.msg .mi{flex:none;width:20px;height:20px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px}
+.msg.e{border-color:var(--red);background:#fdf1f0}
 .msg.e .mi{background:var(--red)}
-.msg.s{border-color:var(--green);color:var(--green);background:#eef8f2}
+.msg.s{border-color:var(--green);background:#eef8f2}
 .msg.s .mi{background:var(--green);border-radius:50%}
-.msg b{display:block;color:#1a1a1a}
-.msg span{color:#2b2b2b}
-.notes{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
-.note{font-family:var(--mono);font-size:12px;border:1.5px solid var(--blue);color:var(--blue);padding:6px 10px;background:#fff}
-.mini{max-width:230px;border:2px solid #9a9ab8;border-radius:18px;overflow:hidden}
-.mini .ui{border:0}
-.mini .ui-body{padding:14px;gap:10px}
-.mini h5{font-size:18px}
-.mini .meta,.mini .file,.mini .msg{font-size:14px}
-.surface-grid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:24px;align-items:start}
+.msg b{display:block;font-weight:600}
+.msg.e b{color:var(--red)}
+.msg.s b{color:var(--green)}
+.notes{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.note{font-family:var(--mono);font-size:11px;border:1.5px solid var(--blue);color:var(--blue);padding:4px 8px;background:#fff}
 
-/* band + footer */
-.band{background:var(--blue);color:#fff;border:0}
-.band h2{color:#fff}
-.band .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.band p{max-width:520px;color:rgba(255,255,255,.85);margin-top:16px}
-footer{background:var(--blue-deep);color:#fff;padding:48px 0 28px}
-.big-word{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(64px,17vw,230px);line-height:.8;opacity:.12;white-space:nowrap;overflow:hidden;margin-bottom:24px}
-footer .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;font-family:var(--mono);font-size:12px;opacity:.75}
-footer .legal a{text-decoration:underline}
+footer{border-top:1px solid var(--hair)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;padding-bottom:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
 
-/* responsive */
-@media (max-width:1000px){
-  nav ul{display:none}
-  .diagram-shell{grid-template-columns:1fr}
+@media (max-width:1050px){
+  .shell{grid-template-columns:1fr}
   .canvas{border-right:0;border-bottom:1px solid var(--blue)}
-  .plane-sec{grid-template-columns:1fr;gap:28px}
-  .brief{grid-template-columns:1fr 1fr}
-  .brief > div:nth-child(2){border-right:0}
-  .brief > div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.4)}
 }
-@media (max-width:700px){
+@media (max-width:640px){
   .wrap{padding:0 16px}
-  section{padding:64px 0}
-  .hero .wrap{padding-top:48px;padding-bottom:56px}
-  .brief{grid-template-columns:1fr}
-  .brief > div{border-right:0;border-bottom:1px solid rgba(255,255,255,.4)}
-  .brief > div:last-child{border-bottom:0}
-  .canvas{padding:8px}
-  .visual{padding:16px}
-  .goal{grid-template-columns:1fr;justify-items:center}
-  .arrow{transform:rotate(90deg)}
-  .outcomes,.scope{grid-template-columns:1fr;width:100%}
-  .flow{grid-template-columns:1fr;gap:14px}
-  .step{display:flex;align-items:center;gap:14px;text-align:left;padding:0}
-  .step .dot{margin:0;flex:none}
-  .step:not(:last-child)::after{top:48px;left:24px;right:auto;bottom:-14px;border-top:0;border-left:2px solid var(--blue)}
-  .devices,.surface-grid{grid-template-columns:1fr}
-  .phone,.mini{max-width:230px;margin:0 auto}
-  .legend{grid-template-columns:1fr}
-  .plane-head .n{font-size:88px}
+  main{padding:16px 0 24px}
+  .canvas{padding:6px}
+  .credit{display:none}
+  .p-head,.p-body{padding-left:16px;padding-right:16px}
+  .p-head h2{font-size:38px}
+  .outcomes{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<nav>
+<header>
   <div class="wrap">
-    <a class="logo" href="#top"><i></i>Subir una tarea</a>
-    <ul>
-      <li><a href="#diagrama">Diagrama</a></li>
-      <li><a href="#strategy">Estrategia</a></li>
-      <li><a href="#scope">Alcance</a></li>
-      <li><a href="#structure">Estructura</a></li>
-      <li><a href="#skeleton">Esqueleto</a></li>
-      <li><a href="#surface">Superficie</a></li>
-    </ul>
-    <a class="btn btn-solid" href="#diagrama">Ver diagrama →</a>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <p class="sub">The Elements of User Experience · Jesse James Garrett</p>
-    <h1>Subir una<br><span>tarea</span></h1>
-    <div class="brief">
-      <div><b>Actividad</b><p class="big">Subir una tarea</p></div>
-      <div><b>Interfaz analizada</b><p>Canvas LMS, desde computadora o celular.</p></div>
-      <div><b>Usuario</b><p>Alumno de UPAEP.</p></div>
-      <div><b>Requisitos</b><p>Entregar antes de la fecha límite, cumplir la rúbrica y, cuando corresponda, adjuntar un archivo PDF o Word con el nombre solicitado.</p></div>
+    <div class="task">
+      <h1><i></i>Subir una tarea</h1>
+      <span>Canvas LMS</span><span>Alumno UPAEP</span><span>Computadora o celular</span>
     </div>
+    <div class="credit">The Elements of User Experience · J. J. Garrett</div>
   </div>
 </header>
 
-<!-- DIAGRAM -->
-<section id="diagrama">
+<main>
   <div class="wrap">
-    <h2>Los cinco planos</h2>
-    <p class="intro">El diagrama original con las etiquetas de la IxDF. Toca un elemento para ver qué significa ese plano al subir una tarea.</p>
-
-    <div class="diagram-shell">
+    <div class="shell">
       <div class="canvas">
-        <svg id="ux-diagram" viewBox="0 0 1000 800" role="img" aria-labelledby="dg-title">
-          <title id="dg-title">Diagrama de los cinco planos de la experiencia de usuario</title>
-          <text class="col-head" x="395" y="44">PRODUCT AS FUNCTIONALITY</text>
-          <text class="col-head" x="735" y="44">PRODUCT AS INFORMATION</text>
-          <line class="divider" x1="565" y1="70" x2="565" y2="760"/>
+        <svg id="ux" viewBox="0 0 1000 810" role="img" aria-labelledby="dg-title">
+          <title id="dg-title">Los cinco planos de Garrett aplicados a subir una tarea en Canvas</title>
+          <text class="col-es" x="395" y="34">PRODUCTO COMO FUNCIONALIDAD</text>
+          <text class="col-en" x="395" y="52">Product as Functionality</text>
+          <text class="col-es" x="735" y="34">PRODUCTO COMO INFORMACIÓN</text>
+          <text class="col-en" x="735" y="52">Product as Information</text>
+          <line class="divider" x1="565" y1="70" x2="565" y2="770"/>
 
-          <rect class="plane-band" x="20" y="76" width="890" height="112"/>
-          <text class="plane-name" x="30" y="130">Surface</text><text class="plane-es" x="30" y="152">superficie</text>
-          <rect class="plane-band" x="20" y="200" width="890" height="176"/>
-          <text class="plane-name" x="30" y="254">Skeleton</text><text class="plane-es" x="30" y="276">esqueleto</text>
-          <rect class="plane-band" x="20" y="388" width="890" height="112"/>
-          <text class="plane-name" x="30" y="442">Structure</text><text class="plane-es" x="30" y="464">estructura</text>
-          <rect class="plane-band" x="20" y="512" width="890" height="112"/>
-          <text class="plane-name" x="30" y="566">Scope</text><text class="plane-es" x="30" y="588">alcance</text>
-          <rect class="plane-band" x="20" y="636" width="890" height="136"/>
-          <text class="plane-name" x="30" y="690">Strategy</text><text class="plane-es" x="30" y="712">estrategia</text>
+          <rect class="band" data-plane="surface"   x="20" y="76"  width="890" height="112"/>
+          <rect class="band" data-plane="skeleton"  x="20" y="200" width="890" height="176"/>
+          <rect class="band" data-plane="structure" x="20" y="388" width="890" height="112"/>
+          <rect class="band" data-plane="scope"     x="20" y="512" width="890" height="112"/>
+          <rect class="band" data-plane="strategy"  x="20" y="636" width="890" height="146"/>
 
-          <g class="box" data-plane="surface" data-el="Sensory Design" tabindex="0" role="button"><rect x="240" y="100" width="650" height="64"/><text x="565" y="132">Sensory Design</text></g>
-          <g class="box" data-plane="skeleton" data-el="Interface Design" tabindex="0" role="button"><rect x="240" y="216" width="310" height="64"/><text x="395" y="248">Interface Design</text></g>
-          <g class="box" data-plane="skeleton" data-el="Navigation Design" tabindex="0" role="button"><rect x="580" y="216" width="310" height="64"/><text x="735" y="248">Navigation Design</text></g>
-          <g class="box" data-plane="skeleton" data-el="Information Design" tabindex="0" role="button"><rect x="240" y="296" width="650" height="64"/><text x="565" y="328">Information Design</text></g>
-          <g class="box" data-plane="structure" data-el="Interaction Design" tabindex="0" role="button"><rect x="240" y="412" width="310" height="64"/><text x="395" y="444">Interaction Design</text></g>
-          <g class="box" data-plane="structure" data-el="Information Architecture" tabindex="0" role="button"><rect x="580" y="412" width="310" height="64"/><text x="735" y="444">Information Architecture</text></g>
-          <g class="box" data-plane="scope" data-el="Functional Specifications" tabindex="0" role="button"><rect x="240" y="536" width="310" height="64"/><text x="395" y="568">Functional Specifications</text></g>
-          <g class="box" data-plane="scope" data-el="Content Requirements" tabindex="0" role="button"><rect x="580" y="536" width="310" height="64"/><text x="735" y="568">Content Requirements</text></g>
-          <g class="box" data-plane="strategy" data-el="User Needs" tabindex="0" role="button"><rect x="240" y="648" width="650" height="52"/><text x="565" y="674">User Needs</text></g>
-          <g class="box" data-plane="strategy" data-el="Business Objectives" tabindex="0" role="button"><rect x="240" y="708" width="650" height="52"/><text x="565" y="734">Business Objectives</text></g>
+          <text class="pnum" x="30" y="102">05</text><text class="pname" x="30" y="136">Superficie</text><text class="pen" x="30" y="156">Surface</text>
+          <text class="pnum" x="30" y="226">04</text><text class="pname" x="30" y="260">Esqueleto</text><text class="pen" x="30" y="280">Skeleton</text>
+          <text class="pnum" x="30" y="414">03</text><text class="pname" x="30" y="448">Estructura</text><text class="pen" x="30" y="468">Structure</text>
+          <text class="pnum" x="30" y="538">02</text><text class="pname" x="30" y="572">Alcance</text><text class="pen" x="30" y="592">Scope</text>
+          <text class="pnum" x="30" y="662">01</text><text class="pname" x="30" y="696">Estrategia</text><text class="pen" x="30" y="716">Strategy</text>
+
+          <g class="box" data-plane="surface" tabindex="0" role="button"><rect x="240" y="100" width="650" height="64"/><text class="es" x="565" y="128">Diseño sensorial</text><text class="en" x="565" y="148">Sensory Design</text></g>
+          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="216" width="310" height="64"/><text class="es" x="395" y="244">Diseño de interfaz</text><text class="en" x="395" y="264">Interface Design</text></g>
+          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="580" y="216" width="310" height="64"/><text class="es" x="735" y="244">Diseño de navegación</text><text class="en" x="735" y="264">Navigation Design</text></g>
+          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="296" width="650" height="64"/><text class="es" x="565" y="324">Diseño de información</text><text class="en" x="565" y="344">Information Design</text></g>
+          <g class="box" data-plane="structure" tabindex="0" role="button"><rect x="240" y="412" width="310" height="64"/><text class="es" x="395" y="440">Diseño de interacción</text><text class="en" x="395" y="460">Interaction Design</text></g>
+          <g class="box" data-plane="structure" tabindex="0" role="button"><rect x="580" y="412" width="310" height="64"/><text class="es" x="735" y="440">Arquitectura de información</text><text class="en" x="735" y="460">Information Architecture</text></g>
+          <g class="box" data-plane="scope" tabindex="0" role="button"><rect x="240" y="536" width="310" height="64"/><text class="es" x="395" y="564">Especificaciones funcionales</text><text class="en" x="395" y="584">Functional Specifications</text></g>
+          <g class="box" data-plane="scope" tabindex="0" role="button"><rect x="580" y="536" width="310" height="64"/><text class="es" x="735" y="564">Requisitos de contenido</text><text class="en" x="735" y="584">Content Requirements</text></g>
+          <g class="box" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="648" width="650" height="58"/><text class="es" x="565" y="672">Necesidades del usuario</text><text class="en" x="565" y="692">User Needs</text></g>
+          <g class="box" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="714" width="650" height="58"/><text class="es" x="565" y="738">Objetivos del negocio</text><text class="en" x="565" y="758">Business Objectives</text></g>
 
           <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0000f2"/></marker></defs>
-          <line class="axis" x1="950" y1="760" x2="950" y2="96" marker-end="url(#arr)"/>
-          <text class="axis-label" x="950" y="82" text-anchor="middle">CONCRETE</text>
-          <text class="axis-label" x="950" y="784" text-anchor="middle">ABSTRACT</text>
+          <line class="axis" x1="950" y1="772" x2="950" y2="96" marker-end="url(#arr)"/>
+          <text class="axis-label" x="950" y="82" text-anchor="middle">CONCRETO</text>
+          <text class="axis-label" x="950" y="798" text-anchor="middle">ABSTRACTO</text>
         </svg>
+        <p class="req"><b>Requisitos</b>Entregar antes de la fecha límite, cumplir la rúbrica y, cuando corresponda, adjuntar un archivo PDF o Word con el nombre solicitado.</p>
       </div>
+
       <aside class="panel" aria-live="polite">
-        <span class="num" id="p-num">01</span>
-        <h3 id="p-title">Estrategia</h3>
-        <span class="el" id="p-el">Strategy · User Needs</span>
-        <p id="p-desc"></p>
-        <a id="p-link" href="#strategy">Ver la sección ↓</a>
+        <div class="p-head">
+          <span class="p-num" id="p-num">01</span>
+          <h2 id="p-title">Estrategia</h2>
+          <span class="p-en" id="p-en">Strategy</span>
+        </div>
+        <div class="p-body">
+          <p class="p-text" id="p-text"></p>
+          <div id="p-vis"></div>
+        </div>
+        <div class="p-nav">
+          <button type="button" id="prev">↓ plano anterior</button>
+          <button type="button" id="next">plano siguiente ↑</button>
+        </div>
       </aside>
     </div>
   </div>
-</section>
-
-<!-- 01 STRATEGY -->
-<section id="strategy">
-  <div class="wrap plane-sec">
-    <div class="plane-head">
-      <span class="n">01</span>
-      <h2>Estrategia</h2>
-      <div class="en">Strategy · User Needs + Business Objectives</div>
-      <p>Facilitar que el alumno entregue correctamente y a tiempo, con certeza de que su trabajo quedó registrado.</p>
-      <div class="done">Completo cuando la entrega es correcta, a tiempo y queda registrada.</div>
-    </div>
-    <div class="visual">
-      <div class="goal">
-        <div class="who"><div class="av"></div>Alumno<br>UPAEP</div>
-        <div class="arrow">→</div>
-        <div class="outcomes">
-          <div class="oc"><div class="ic">✓</div><b>Correcta</b><span>Cumple la rúbrica y el formato.</span></div>
-          <div class="oc"><div class="ic">⏱</div><b>A tiempo</b><span>Antes de la fecha límite.</span></div>
-          <div class="oc"><div class="ic">▣</div><b>Registrada</b><span>Certeza de que quedó entregada.</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 SCOPE -->
-<section id="scope" class="alt">
-  <div class="wrap plane-sec">
-    <div class="plane-head">
-      <span class="n">02</span>
-      <h2>Alcance</h2>
-      <div class="en">Scope · Functional Specifications + Content Requirements</div>
-      <p>Permitir entregar PDF, Word o texto escrito en Canvas, según las opciones habilitadas. Mostrar requisitos, fecha límite y rúbrica. Permitir revisar el archivo seleccionado, confirmar el envío y consultar las calificaciones y la retroalimentación.</p>
-      <div class="done">Completo cuando cada función de la lista existe.</div>
-    </div>
-    <div class="visual">
-      <div class="scope">
-        <div>
-          <h4>Entregar</h4>
-          <div class="chips"><div class="chip">PDF</div><div class="chip">Word</div><div class="chip">Texto en Canvas</div></div>
-        </div>
-        <div>
-          <h4>Mostrar</h4>
-          <div class="chips"><div class="chip">Requisitos</div><div class="chip">Fecha límite</div><div class="chip">Rúbrica</div></div>
-        </div>
-        <div>
-          <h4>Revisar y confirmar</h4>
-          <div class="chips"><div class="chip">Archivo seleccionado</div><div class="chip">Confirmar envío</div><div class="chip">Calificación y retroalimentación</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 03 STRUCTURE -->
-<section id="structure">
-  <div class="wrap plane-sec">
-    <div class="plane-head">
-      <span class="n">03</span>
-      <h2>Estructura</h2>
-      <div class="en">Structure · Interaction Design + Information Architecture</div>
-      <p>Organizar el recorrido para abrir la tarea, consultar las instrucciones y la rúbrica, adjuntar el archivo o escribir el texto, revisar el contenido, enviarlo y comprobar la entrega. Ante un error, indicar cómo corregirlo.</p>
-      <div class="done">Completo cuando el alumno llega del paso 1 al 6, y cada error lo regresa al paso correcto.</div>
-    </div>
-    <div class="visual">
-      <div class="flow">
-        <div class="step"><div class="dot">1</div><span>Abrir la tarea</span></div>
-        <div class="step"><div class="dot">2</div><span>Instrucciones y rúbrica</span></div>
-        <div class="step key"><div class="dot">3</div><span>Adjuntar archivo o escribir texto</span></div>
-        <div class="step"><div class="dot">4</div><span>Revisar contenido</span></div>
-        <div class="step key"><div class="dot">5</div><span>Enviar</span></div>
-        <div class="step"><div class="dot">6</div><span>Comprobar entrega</span></div>
-      </div>
-      <div class="err"><span class="loop">↺</span><div><b>Si hay error</b><br>Indicar cómo corregirlo y volver al paso 3.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 SKELETON -->
-<section id="skeleton" class="alt">
-  <div class="wrap plane-sec">
-    <div class="plane-head">
-      <span class="n">04</span>
-      <h2>Esqueleto</h2>
-      <div class="en">Skeleton · Interface + Navigation + Information Design</div>
-      <p>Ubicar las instrucciones, la fecha límite y la rúbrica en lugares fáciles de localizar. Organizar el área de entrega, el nombre del archivo seleccionado y el botón “Enviar tarea” en una secuencia clara. Colocar la confirmación de entrega en un lugar visible.</p>
-      <div class="done">Completo cuando el wireframe acomoda todo en ese orden, en computadora y celular.</div>
-    </div>
-    <div class="visual">
-      <div class="devices">
-        <div class="screen">
-          <div class="bar"><i></i><i></i><i></i></div>
-          <div class="wf">
-            <div class="row"><div class="blk" style="flex:2"><span class="pin">1</span>Título de la tarea</div><div class="blk" style="flex:1"><span class="pin">2</span>Fecha límite</div></div>
-            <div class="blk" style="min-height:52px"><span class="pin">3</span>Instrucciones</div>
-            <div class="blk"><span class="pin">4</span>Rúbrica</div>
-            <div class="blk out"><span class="pin">5</span>Área de entrega: archivo o texto</div>
-            <div class="blk"><span class="pin">6</span>Apellido_Tarea3.pdf</div>
-            <div class="blk btn-w"><span class="pin">7</span>Enviar tarea</div>
-            <div class="blk ok"><span class="pin">8</span>Confirmación de entrega</div>
-          </div>
-        </div>
-        <div class="phone">
-          <div class="wf">
-            <div class="blk"><span class="pin">1</span>Título</div>
-            <div class="blk"><span class="pin">2</span>Fecha límite</div>
-            <div class="blk" style="min-height:40px"><span class="pin">3</span>Instrucciones</div>
-            <div class="blk"><span class="pin">4</span>Rúbrica</div>
-            <div class="blk out" style="min-height:52px"><span class="pin">5</span>Entrega</div>
-            <div class="blk"><span class="pin">6</span>Archivo</div>
-            <div class="blk btn-w" style="width:auto"><span class="pin">7</span>Enviar tarea</div>
-            <div class="blk ok"><span class="pin">8</span>Confirmación</div>
-          </div>
-        </div>
-      </div>
-      <div class="legend">
-        <div><span class="pin">1–4</span>Qué entregar y cuándo</div>
-        <div><span class="pin">5–7</span>Secuencia de entrega</div>
-        <div><span class="pin">8</span>Confirmación visible</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 05 SURFACE -->
-<section id="surface">
-  <div class="wrap plane-sec">
-    <div class="plane-head">
-      <span class="n">05</span>
-      <h2>Superficie</h2>
-      <div class="en">Surface · Sensory Design</div>
-      <p>Utilizar texto legible, contraste adecuado y botones distinguibles en computadora y celular. Mostrar claramente los errores y la confirmación de entrega, sin depender únicamente del color.</p>
-      <div class="done">Completo cuando se lee bien en ambos dispositivos y cada estado tiene ícono + texto.</div>
-    </div>
-    <div class="visual">
-      <div class="surface-grid">
-        <div class="ui" aria-label="Ejemplo de interfaz en computadora">
-          <div class="ui-top">Curso · Tareas</div>
-          <div class="ui-body">
-            <h5>Tarea 3 · Ensayo final</h5>
-            <div class="meta"><span><b>Fecha límite:</b> 24 oct, 23:59</span><span><b>Formato:</b> PDF o Word</span></div>
-            <span class="rub">Ver rúbrica</span>
-            <div class="file"><span class="file-ic"></span>Apellido_Tarea3.pdf</div>
-            <button class="send" type="button">Enviar tarea</button>
-            <div class="msg e"><span class="mi">!</span><div><b>No se pudo enviar</b><span>El archivo debe ser PDF o Word. Elige otro archivo.</span></div></div>
-            <div class="msg s"><span class="mi">✓</span><div><b>Tarea enviada</b><span>23 oct, 18:42 · Apellido_Tarea3.pdf</span></div></div>
-          </div>
-        </div>
-        <div class="mini" aria-label="Ejemplo de interfaz en celular">
-          <div class="ui">
-            <div class="ui-top">Tareas</div>
-            <div class="ui-body">
-              <h5>Tarea 3</h5>
-              <div class="meta"><span><b>Vence:</b> 24 oct, 23:59</span></div>
-              <div class="file"><span class="file-ic"></span>Apellido_Tarea3.pdf</div>
-              <button class="send" type="button" style="justify-self:stretch">Enviar tarea</button>
-              <div class="msg s"><span class="mi">✓</span><div><b>Tarea enviada</b></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="notes">
-        <span class="note">Texto ≥ 16 px</span>
-        <span class="note">Contraste ≥ 4.5:1</span>
-        <span class="note">Botón grande y distinguible</span>
-        <span class="note">Ícono + texto, no solo color</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <div>
-      <h2>De lo abstracto<br>a lo concreto</h2>
-      <p>Del porqué entregar, hasta cómo se ve la confirmación de entrega.</p>
-    </div>
-    <a class="btn btn-solid" href="#top">↑ Volver arriba</a>
-  </div>
-</section>
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="big-word">Elements</div>
-    <div class="legal">
-      <span>Modelo: Jesse James Garrett, <a href="http://www.jjg.net/elements/">The Elements of User Experience</a> · Etiquetas: Interaction Design Foundation</span>
-      <span>Interfaz de ejemplo, no oficial de Canvas</span>
-    </div>
+    <span>Modelo: Jesse James Garrett · Etiquetas: Interaction Design Foundation</span>
+    <span>Interfaz de ejemplo, no oficial de Canvas</span>
   </div>
 </footer>
 
+<!-- visuals per plane -->
+<template id="v-strategy">
+  <div class="vis">
+    <div class="vis-label">Objetivo de la entrega</div>
+    <div class="outcomes">
+      <div class="oc"><div class="ic">✓</div><b>Correcta</b><span>Cumple la rúbrica y el formato.</span></div>
+      <div class="oc"><div class="ic">⏱</div><b>A tiempo</b><span>Antes de la fecha límite.</span></div>
+      <div class="oc"><div class="ic">▣</div><b>Registrada</b><span>Certeza de que quedó entregada.</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="v-scope">
+  <div class="vis">
+    <div class="vis-label">Funciones y contenido</div>
+    <div class="sgroup"><h4>Entregar</h4><div class="chips"><span class="chip">PDF</span><span class="chip">Word</span><span class="chip">Texto en Canvas</span></div></div>
+    <div class="sgroup"><h4>Mostrar</h4><div class="chips"><span class="chip">Requisitos</span><span class="chip">Fecha límite</span><span class="chip">Rúbrica</span></div></div>
+    <div class="sgroup"><h4>Revisar y confirmar</h4><div class="chips"><span class="chip">Archivo seleccionado</span><span class="chip">Confirmar envío</span><span class="chip">Calificación</span><span class="chip">Retroalimentación</span></div></div>
+  </div>
+</template>
+
+<template id="v-structure">
+  <div class="vis">
+    <div class="vis-label">Recorrido</div>
+    <ol class="flow">
+      <li><span class="d">1</span>Abrir la tarea</li>
+      <li><span class="d">2</span>Consultar instrucciones y rúbrica</li>
+      <li class="key"><span class="d">3</span>Adjuntar archivo o escribir texto</li>
+      <li><span class="d">4</span>Revisar el contenido</li>
+      <li class="key"><span class="d">5</span>Enviar</li>
+      <li><span class="d">6</span>Comprobar la entrega</li>
+    </ol>
+    <div class="err"><span>↺</span>Si hay error: indicar cómo corregirlo y volver al paso 3.</div>
+  </div>
+</template>
+
+<template id="v-skeleton">
+  <div class="vis">
+    <div class="vis-label">Wireframe</div>
+    <div class="wf">
+      <div class="row"><div class="blk" style="flex:2"><span class="pin">1</span>Título de la tarea</div><div class="blk" style="flex:1"><span class="pin">2</span>Fecha límite</div></div>
+      <div class="blk tall"><span class="pin">3</span>Instrucciones</div>
+      <div class="blk"><span class="pin">4</span>Rúbrica</div>
+      <div class="blk out"><span class="pin">5</span>Área de entrega</div>
+      <div class="blk"><span class="pin">6</span>Apellido_Tarea3.pdf</div>
+      <div class="blk cta"><span class="pin">7</span>Enviar tarea</div>
+      <div class="blk ok"><span class="pin">8</span>Confirmación de entrega</div>
+    </div>
+    <div class="legend">
+      <div><span class="pin">1–4</span>Qué entregar y cuándo: fácil de localizar</div>
+      <div><span class="pin">5–7</span>Entrega en secuencia clara</div>
+      <div><span class="pin">8</span>Confirmación visible</div>
+    </div>
+  </div>
+</template>
+
+<template id="v-surface">
+  <div class="vis">
+    <div class="vis-label">Interfaz final</div>
+    <div class="ui">
+      <div class="ui-top">Curso · Tareas</div>
+      <div class="ui-body">
+        <h5>Tarea 3 · Ensayo final</h5>
+        <div class="meta"><b>Fecha límite:</b> 24 oct, 23:59 · <b>Formato:</b> PDF o Word</div>
+        <span class="rub">Ver rúbrica</span>
+        <div class="file"><span class="file-ic"></span>Apellido_Tarea3.pdf</div>
+        <span class="send">Enviar tarea</span>
+        <div class="msg e"><span class="mi">!</span><div><b>No se pudo enviar</b>El archivo debe ser PDF o Word.</div></div>
+        <div class="msg s"><span class="mi">✓</span><div><b>Tarea enviada</b>23 oct, 18:42</div></div>
+      </div>
+    </div>
+    <div class="notes"><span class="note">Texto legible</span><span class="note">Contraste ≥ 4.5:1</span><span class="note">Botón distinguible</span><span class="note">Ícono + texto, no solo color</span></div>
+  </div>
+</template>
+
 <script>
+const ORDER = ["strategy","scope","structure","skeleton","surface"];
 const P = {
-  strategy:{n:"01",t:"Estrategia",en:"Strategy",d:"Facilitar que el alumno entregue correctamente y a tiempo, con certeza de que su trabajo quedó registrado."},
-  scope:{n:"02",t:"Alcance",en:"Scope",d:"Permitir entregar PDF, Word o texto; mostrar requisitos, fecha límite y rúbrica; revisar el archivo, confirmar el envío y consultar calificación y retroalimentación."},
-  structure:{n:"03",t:"Estructura",en:"Structure",d:"Abrir la tarea → instrucciones y rúbrica → adjuntar o escribir → revisar → enviar → comprobar. Ante un error, indicar cómo corregirlo."},
-  skeleton:{n:"04",t:"Esqueleto",en:"Skeleton",d:"Instrucciones, fecha límite y rúbrica fáciles de localizar; área de entrega, archivo y “Enviar tarea” en secuencia; confirmación visible."},
-  surface:{n:"05",t:"Superficie",en:"Surface",d:"Texto legible, buen contraste y botones distinguibles. Errores y confirmación claros, sin depender solo del color."}
+  strategy:{n:"01",t:"Estrategia",en:"Strategy · Necesidades del usuario + Objetivos del negocio",
+    d:"Facilitar que el alumno entregue correctamente y a tiempo, con certeza de que su trabajo quedó registrado."},
+  scope:{n:"02",t:"Alcance",en:"Scope · Especificaciones funcionales + Requisitos de contenido",
+    d:"Permitir entregar PDF, Word o texto escrito en Canvas, según las opciones habilitadas. Mostrar requisitos, fecha límite y rúbrica. Permitir revisar el archivo seleccionado, confirmar el envío y consultar las calificaciones y la retroalimentación."},
+  structure:{n:"03",t:"Estructura",en:"Structure · Diseño de interacción + Arquitectura de información",
+    d:"Organizar el recorrido para abrir la tarea, consultar las instrucciones y la rúbrica, adjuntar el archivo o escribir el texto, revisar el contenido, enviarlo y comprobar la entrega. Ante un error, indicar cómo corregirlo."},
+  skeleton:{n:"04",t:"Esqueleto",en:"Skeleton · Diseño de interfaz + navegación + información",
+    d:"Ubicar las instrucciones, la fecha límite y la rúbrica en lugares fáciles de localizar. Organizar el área de entrega, el nombre del archivo seleccionado y el botón “Enviar tarea” en una secuencia clara. Colocar la confirmación de entrega en un lugar visible."},
+  surface:{n:"05",t:"Superficie",en:"Surface · Diseño sensorial",
+    d:"Utilizar texto legible, contraste adecuado y botones distinguibles en computadora y celular. Mostrar claramente los errores y la confirmación de entrega, sin depender únicamente del color."}
 };
 const $ = id => document.getElementById(id);
-const boxes = document.querySelectorAll("#ux-diagram .box");
-function show(b){
-  const p = P[b.dataset.plane];
-  boxes.forEach(x => x.classList.toggle("active", x === b));
+const boxes = [...document.querySelectorAll("#ux .box")];
+const bands = [...document.querySelectorAll("#ux .band")];
+let cur = "strategy";
+
+function show(plane, box){
+  cur = plane;
+  const p = P[plane];
+  const target = box || boxes.find(b => b.dataset.plane === plane);
+  boxes.forEach(b => b.classList.toggle("on", b === target));
+  bands.forEach(b => b.classList.toggle("on", b.dataset.plane === plane));
   $("p-num").textContent = p.n;
   $("p-title").textContent = p.t;
-  $("p-el").textContent = p.en + " · " + b.dataset.el;
-  $("p-desc").textContent = p.d;
-  $("p-link").href = "#" + b.dataset.plane;
+  $("p-en").textContent = p.en;
+  $("p-text").textContent = p.d;
+  $("p-vis").replaceChildren($("v-" + plane).content.cloneNode(true));
+  const i = ORDER.indexOf(plane);
+  $("prev").disabled = i === 0;
+  $("next").disabled = i === ORDER.length - 1;
 }
 boxes.forEach(b => {
-  b.addEventListener("click", () => show(b));
-  b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(b); } });
+  b.addEventListener("click", () => show(b.dataset.plane, b));
+  b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(b.dataset.plane, b); } });
 });
-show(document.querySelector('[data-el="User Needs"]'));
+$("prev").addEventListener("click", () => show(ORDER[ORDER.indexOf(cur) - 1]));
+$("next").addEventListener("click", () => show(ORDER[ORDER.indexOf(cur) + 1]));
+show("strategy");
 </script>
 </body>
 </html>
