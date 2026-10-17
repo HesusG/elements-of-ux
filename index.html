@@ -144,6 +144,26 @@ svg .divider{stroke:var(--blue);stroke-dasharray:4 5;opacity:.5}
 .notes{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
 .note{font-family:var(--mono);font-size:11px;border:1.5px solid var(--blue);color:var(--blue);padding:4px 8px;background:#fff}
 
+.p-el{display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--blue);padding:4px 0 4px 12px}
+.p-el b{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--blue)}
+.p-el span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.p-dots{display:flex;gap:6px;padding:0 24px 14px}
+.p-dots button{flex:1;height:6px;border:0;background:var(--blue-10);cursor:pointer;padding:0}
+.p-dots button.on{background:var(--blue)}
+.tree{list-style:none;font-family:var(--mono);font-size:13px;color:var(--blue)}
+.tree li{position:relative;padding:3px 0 3px 0}
+.tree ul{list-style:none;margin-left:10px;padding-left:14px;border-left:2px solid var(--blue)}
+.tree ul li::before{content:"";position:absolute;left:-14px;top:13px;width:10px;border-top:2px solid var(--blue)}
+.tree .node{display:inline-block;border:1.5px solid var(--blue);background:#fff;padding:3px 8px}
+.tree .here{background:var(--blue);color:#fff}
+.wfx{display:grid;grid-template-columns:70px 1fr;gap:7px}
+.wfx .side{display:flex;flex-direction:column;gap:5px}
+.wfx .side .blk{min-height:22px;font-size:10px;padding:3px 5px}
+.wf .main{display:grid;gap:7px}
+.wf.hl-interface .blk:not([data-g~="i"]),
+.wf.hl-navigation .blk:not([data-g~="n"]),
+.wf.hl-info .blk:not([data-g~="f"]){opacity:.28}
+.wf .blk[data-g]{transition:opacity .15s}
 footer{border-top:1px solid var(--hair)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;padding-bottom:18px;font-family:var(--mono);font-size:11px;color:var(--muted)}
 
@@ -198,16 +218,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
           <text class="pnum" x="30" y="538">02</text><text class="pname" x="30" y="572">Alcance</text><text class="pen" x="30" y="592">Scope</text>
           <text class="pnum" x="30" y="662">01</text><text class="pname" x="30" y="696">Estrategia</text><text class="pen" x="30" y="716">Strategy</text>
 
-          <g class="box" data-plane="surface" tabindex="0" role="button"><rect x="240" y="100" width="650" height="64"/><text class="es" x="565" y="128">Diseño sensorial</text><text class="en" x="565" y="148">Sensory Design</text></g>
-          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="216" width="310" height="64"/><text class="es" x="395" y="244">Diseño de interfaz</text><text class="en" x="395" y="264">Interface Design</text></g>
-          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="580" y="216" width="310" height="64"/><text class="es" x="735" y="244">Diseño de navegación</text><text class="en" x="735" y="264">Navigation Design</text></g>
-          <g class="box" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="296" width="650" height="64"/><text class="es" x="565" y="324">Diseño de información</text><text class="en" x="565" y="344">Information Design</text></g>
-          <g class="box" data-plane="structure" tabindex="0" role="button"><rect x="240" y="412" width="310" height="64"/><text class="es" x="395" y="440">Diseño de interacción</text><text class="en" x="395" y="460">Interaction Design</text></g>
-          <g class="box" data-plane="structure" tabindex="0" role="button"><rect x="580" y="412" width="310" height="64"/><text class="es" x="735" y="440">Arquitectura de información</text><text class="en" x="735" y="460">Information Architecture</text></g>
-          <g class="box" data-plane="scope" tabindex="0" role="button"><rect x="240" y="536" width="310" height="64"/><text class="es" x="395" y="564">Especificaciones funcionales</text><text class="en" x="395" y="584">Functional Specifications</text></g>
-          <g class="box" data-plane="scope" tabindex="0" role="button"><rect x="580" y="536" width="310" height="64"/><text class="es" x="735" y="564">Requisitos de contenido</text><text class="en" x="735" y="584">Content Requirements</text></g>
-          <g class="box" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="648" width="650" height="58"/><text class="es" x="565" y="672">Necesidades del usuario</text><text class="en" x="565" y="692">User Needs</text></g>
-          <g class="box" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="714" width="650" height="58"/><text class="es" x="565" y="738">Objetivos del negocio</text><text class="en" x="565" y="758">Business Objectives</text></g>
+          <g class="box" data-el="sensory" data-plane="surface" tabindex="0" role="button"><rect x="240" y="100" width="650" height="64"/><text class="es" x="565" y="128">Diseño sensorial</text><text class="en" x="565" y="148">Sensory Design</text></g>
+          <g class="box" data-el="interface" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="216" width="310" height="64"/><text class="es" x="395" y="244">Diseño de interfaz</text><text class="en" x="395" y="264">Interface Design</text></g>
+          <g class="box" data-el="navigation" data-plane="skeleton" tabindex="0" role="button"><rect x="580" y="216" width="310" height="64"/><text class="es" x="735" y="244">Diseño de navegación</text><text class="en" x="735" y="264">Navigation Design</text></g>
+          <g class="box" data-el="infodesign" data-plane="skeleton" tabindex="0" role="button"><rect x="240" y="296" width="650" height="64"/><text class="es" x="565" y="324">Diseño de información</text><text class="en" x="565" y="344">Information Design</text></g>
+          <g class="box" data-el="interaction" data-plane="structure" tabindex="0" role="button"><rect x="240" y="412" width="310" height="64"/><text class="es" x="395" y="440">Diseño de interacción</text><text class="en" x="395" y="460">Interaction Design</text></g>
+          <g class="box" data-el="ia" data-plane="structure" tabindex="0" role="button"><rect x="580" y="412" width="310" height="64"/><text class="es" x="735" y="440">Arquitectura de información</text><text class="en" x="735" y="460">Information Architecture</text></g>
+          <g class="box" data-el="functional" data-plane="scope" tabindex="0" role="button"><rect x="240" y="536" width="310" height="64"/><text class="es" x="395" y="564">Especificaciones funcionales</text><text class="en" x="395" y="584">Functional Specifications</text></g>
+          <g class="box" data-el="content" data-plane="scope" tabindex="0" role="button"><rect x="580" y="536" width="310" height="64"/><text class="es" x="735" y="564">Requisitos de contenido</text><text class="en" x="735" y="584">Content Requirements</text></g>
+          <g class="box" data-el="userneeds" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="648" width="650" height="58"/><text class="es" x="565" y="672">Necesidades del usuario</text><text class="en" x="565" y="692">User Needs</text></g>
+          <g class="box" data-el="objectives" data-plane="strategy" tabindex="0" role="button"><rect x="240" y="714" width="650" height="58"/><text class="es" x="565" y="738">Objetivos del negocio</text><text class="en" x="565" y="758">Business Objectives</text></g>
 
           <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0000f2"/></marker></defs>
           <line class="axis" x1="950" y1="772" x2="950" y2="96" marker-end="url(#arr)"/>
@@ -224,12 +244,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
           <span class="p-en" id="p-en">Strategy</span>
         </div>
         <div class="p-body">
+          <div class="p-el"><b id="p-el-es"></b><span id="p-el-en"></span></div>
           <p class="p-text" id="p-text"></p>
           <div id="p-vis"></div>
         </div>
+        <div class="p-dots" id="p-dots"></div>
         <div class="p-nav">
-          <button type="button" id="prev">↓ plano anterior</button>
-          <button type="button" id="next">plano siguiente ↑</button>
+          <button type="button" id="prev">↓ anterior</button>
+          <button type="button" id="next">siguiente ↑</button>
         </div>
       </aside>
     </div>
@@ -243,10 +265,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   </div>
 </footer>
 
-<!-- visuals per plane -->
-<template id="v-strategy">
+<!-- visuals per element -->
+<template id="v-userneeds">
   <div class="vis">
-    <div class="vis-label">Objetivo de la entrega</div>
+    <div class="vis-label">Lo que necesita el alumno</div>
     <div class="outcomes">
       <div class="oc"><div class="ic">✓</div><b>Correcta</b><span>Cumple la rúbrica y el formato.</span></div>
       <div class="oc"><div class="ic">⏱</div><b>A tiempo</b><span>Antes de la fecha límite.</span></div>
@@ -255,51 +277,99 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
   </div>
 </template>
 
-<template id="v-scope">
+<template id="v-objectives">
   <div class="vis">
-    <div class="vis-label">Funciones y contenido</div>
+    <div class="vis-label">Lo que busca la plataforma</div>
+    <div class="outcomes">
+      <div class="oc"><div class="ic">↓</div><b>Facilitar</b><span>Entregar sin pasos confusos.</span></div>
+      <div class="oc"><div class="ic">✓</div><b>Recibir bien</b><span>Trabajos completos y en formato.</span></div>
+      <div class="oc"><div class="ic">▣</div><b>Registrar</b><span>Evidencia de cada entrega.</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="v-functional">
+  <div class="vis">
+    <div class="vis-label">Funciones</div>
     <div class="sgroup"><h4>Entregar</h4><div class="chips"><span class="chip">PDF</span><span class="chip">Word</span><span class="chip">Texto en Canvas</span></div></div>
-    <div class="sgroup"><h4>Mostrar</h4><div class="chips"><span class="chip">Requisitos</span><span class="chip">Fecha límite</span><span class="chip">Rúbrica</span></div></div>
-    <div class="sgroup"><h4>Revisar y confirmar</h4><div class="chips"><span class="chip">Archivo seleccionado</span><span class="chip">Confirmar envío</span><span class="chip">Calificación</span><span class="chip">Retroalimentación</span></div></div>
+    <div class="sgroup"><h4>Antes de enviar</h4><div class="chips"><span class="chip">Revisar archivo seleccionado</span><span class="chip">Confirmar envío</span></div></div>
+    <div class="sgroup"><h4>Después</h4><div class="chips"><span class="chip">Consultar calificación</span><span class="chip">Consultar retroalimentación</span></div></div>
   </div>
 </template>
 
-<template id="v-structure">
+<template id="v-content">
   <div class="vis">
-    <div class="vis-label">Recorrido</div>
-    <ol class="flow">
-      <li><span class="d">1</span>Abrir la tarea</li>
-      <li><span class="d">2</span>Consultar instrucciones y rúbrica</li>
-      <li class="key"><span class="d">3</span>Adjuntar archivo o escribir texto</li>
-      <li><span class="d">4</span>Revisar el contenido</li>
-      <li class="key"><span class="d">5</span>Enviar</li>
-      <li><span class="d">6</span>Comprobar la entrega</li>
-    </ol>
-    <div class="err"><span>↺</span>Si hay error: indicar cómo corregirlo y volver al paso 3.</div>
+    <div class="vis-label">Contenido que debe mostrarse</div>
+    <div class="sgroup"><h4>Qué entregar</h4><div class="chips"><span class="chip">Requisitos</span><span class="chip">Formato y nombre del archivo</span></div></div>
+    <div class="sgroup"><h4>Cuándo</h4><div class="chips"><span class="chip">Fecha límite</span></div></div>
+    <div class="sgroup"><h4>Cómo se evalúa</h4><div class="chips"><span class="chip">Rúbrica</span></div></div>
   </div>
 </template>
 
-<template id="v-skeleton">
+<template id="v-interaction">
+  <div class="vis">
+    <div class="vis-label">Qué hace el alumno y cómo responde Canvas</div>
+    <ol class="flow">
+      <li class="key"><span class="d">1</span>Adjuntar archivo o escribir texto</li>
+      <li><span class="d">2</span>Revisar el contenido</li>
+      <li class="key"><span class="d">3</span>Enviar</li>
+      <li><span class="d">4</span>Comprobar la entrega</li>
+    </ol>
+    <div class="err"><span>↺</span>Si hay error: indicar cómo corregirlo y volver al paso 1.</div>
+  </div>
+</template>
+
+<template id="v-ia">
+  <div class="vis">
+    <div class="vis-label">Dónde vive cada cosa</div>
+    <ul class="tree">
+      <li><span class="node">Curso</span>
+        <ul>
+          <li><span class="node">Tareas</span>
+            <ul>
+              <li><span class="node here">Tarea 3</span>
+                <ul>
+                  <li><span class="node">Instrucciones</span></li>
+                  <li><span class="node">Fecha límite</span></li>
+                  <li><span class="node">Rúbrica</span></li>
+                  <li><span class="node">Entrega</span></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="node">Calificaciones y retroalimentación</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template id="v-wire">
   <div class="vis">
     <div class="vis-label">Wireframe</div>
     <div class="wf">
-      <div class="row"><div class="blk" style="flex:2"><span class="pin">1</span>Título de la tarea</div><div class="blk" style="flex:1"><span class="pin">2</span>Fecha límite</div></div>
-      <div class="blk tall"><span class="pin">3</span>Instrucciones</div>
-      <div class="blk"><span class="pin">4</span>Rúbrica</div>
-      <div class="blk out"><span class="pin">5</span>Área de entrega</div>
-      <div class="blk"><span class="pin">6</span>Apellido_Tarea3.pdf</div>
-      <div class="blk cta"><span class="pin">7</span>Enviar tarea</div>
-      <div class="blk ok"><span class="pin">8</span>Confirmación de entrega</div>
-    </div>
-    <div class="legend">
-      <div><span class="pin">1–4</span>Qué entregar y cuándo: fácil de localizar</div>
-      <div><span class="pin">5–7</span>Entrega en secuencia clara</div>
-      <div><span class="pin">8</span>Confirmación visible</div>
+      <div class="blk" data-g="n">Curso › Tareas › Tarea 3</div>
+      <div class="wfx">
+        <div class="side">
+          <div class="blk" data-g="n">Inicio</div>
+          <div class="blk" data-g="n">Tareas</div>
+          <div class="blk" data-g="n">Calif.</div>
+        </div>
+        <div class="main">
+          <div class="row"><div class="blk" data-g="f" style="flex:2">Título de la tarea</div><div class="blk" data-g="f" style="flex:1">Fecha límite</div></div>
+          <div class="blk tall" data-g="f">Instrucciones</div>
+          <div class="blk" data-g="f n">Rúbrica</div>
+          <div class="blk out" data-g="i">Área de entrega</div>
+          <div class="blk" data-g="i">Apellido_Tarea3.pdf</div>
+          <div class="blk cta" data-g="i">Enviar tarea</div>
+          <div class="blk ok" data-g="f">Confirmación de entrega</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<template id="v-surface">
+<template id="v-sensory">
   <div class="vis">
     <div class="vis-label">Interfaz final</div>
     <div class="ui">
@@ -319,46 +389,74 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 </template>
 
 <script>
-const ORDER = ["strategy","scope","structure","skeleton","surface"];
-const P = {
-  strategy:{n:"01",t:"Estrategia",en:"Strategy · Necesidades del usuario + Objetivos del negocio",
-    d:"Facilitar que el alumno entregue correctamente y a tiempo, con certeza de que su trabajo quedó registrado."},
-  scope:{n:"02",t:"Alcance",en:"Scope · Especificaciones funcionales + Requisitos de contenido",
-    d:"Permitir entregar PDF, Word o texto escrito en Canvas, según las opciones habilitadas. Mostrar requisitos, fecha límite y rúbrica. Permitir revisar el archivo seleccionado, confirmar el envío y consultar las calificaciones y la retroalimentación."},
-  structure:{n:"03",t:"Estructura",en:"Structure · Diseño de interacción + Arquitectura de información",
-    d:"Organizar el recorrido para abrir la tarea, consultar las instrucciones y la rúbrica, adjuntar el archivo o escribir el texto, revisar el contenido, enviarlo y comprobar la entrega. Ante un error, indicar cómo corregirlo."},
-  skeleton:{n:"04",t:"Esqueleto",en:"Skeleton · Diseño de interfaz + navegación + información",
-    d:"Ubicar las instrucciones, la fecha límite y la rúbrica en lugares fáciles de localizar. Organizar el área de entrega, el nombre del archivo seleccionado y el botón “Enviar tarea” en una secuencia clara. Colocar la confirmación de entrega en un lugar visible."},
-  surface:{n:"05",t:"Superficie",en:"Surface · Diseño sensorial",
-    d:"Utilizar texto legible, contraste adecuado y botones distinguibles en computadora y celular. Mostrar claramente los errores y la confirmación de entrega, sin depender únicamente del color."}
+const PLANES = {
+  strategy:{n:"01",t:"Estrategia",en:"Strategy"},
+  scope:{n:"02",t:"Alcance",en:"Scope"},
+  structure:{n:"03",t:"Estructura",en:"Structure"},
+  skeleton:{n:"04",t:"Esqueleto",en:"Skeleton"},
+  surface:{n:"05",t:"Superficie",en:"Surface"}
 };
+// orden de abajo (abstracto) hacia arriba (concreto)
+const EL = [
+  {id:"userneeds",plane:"strategy",es:"Necesidades del usuario",en:"User Needs",
+   d:"Entregar correctamente y a tiempo, con certeza de que su trabajo quedó registrado."},
+  {id:"objectives",plane:"strategy",es:"Objetivos del negocio",en:"Business Objectives",
+   d:"Facilitar que el alumno entregue correctamente y a tiempo, y que cada entrega quede registrada."},
+  {id:"functional",plane:"scope",es:"Especificaciones funcionales",en:"Functional Specifications",
+   d:"Permitir entregar PDF, Word o texto escrito en Canvas, según las opciones habilitadas. Permitir revisar el archivo seleccionado, confirmar el envío y consultar las calificaciones y la retroalimentación."},
+  {id:"content",plane:"scope",es:"Requisitos de contenido",en:"Content Requirements",
+   d:"Mostrar requisitos, fecha límite y rúbrica."},
+  {id:"interaction",plane:"structure",es:"Diseño de interacción",en:"Interaction Design",
+   d:"Adjuntar el archivo o escribir el texto, revisar el contenido, enviarlo y comprobar la entrega. Ante un error, indicar cómo corregirlo."},
+  {id:"ia",plane:"structure",es:"Arquitectura de información",en:"Information Architecture",
+   d:"Organizar el recorrido para abrir la tarea y consultar las instrucciones y la rúbrica."},
+  {id:"interface",plane:"skeleton",es:"Diseño de interfaz",en:"Interface Design",vis:"wire",hl:"interface",
+   d:"Organizar el área de entrega, el nombre del archivo seleccionado y el botón “Enviar tarea” en una secuencia clara."},
+  {id:"navigation",plane:"skeleton",es:"Diseño de navegación",en:"Navigation Design",vis:"wire",hl:"navigation",
+   d:"Llegar a la tarea desde el curso y abrir la rúbrica sin perderse."},
+  {id:"infodesign",plane:"skeleton",es:"Diseño de información",en:"Information Design",vis:"wire",hl:"info",
+   d:"Ubicar las instrucciones, la fecha límite y la rúbrica en lugares fáciles de localizar. Colocar la confirmación de entrega en un lugar visible."},
+  {id:"sensory",plane:"surface",es:"Diseño sensorial",en:"Sensory Design",
+   d:"Utilizar texto legible, contraste adecuado y botones distinguibles en computadora y celular. Mostrar claramente los errores y la confirmación de entrega, sin depender únicamente del color."}
+];
 const $ = id => document.getElementById(id);
 const boxes = [...document.querySelectorAll("#ux .box")];
 const bands = [...document.querySelectorAll("#ux .band")];
-let cur = "strategy";
+const dots = $("p-dots");
+EL.forEach((e, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.title = e.es; b.setAttribute("aria-label", e.es);
+  b.addEventListener("click", () => show(i));
+  dots.appendChild(b);
+});
+let cur = 0;
 
-function show(plane, box){
-  cur = plane;
-  const p = P[plane];
-  const target = box || boxes.find(b => b.dataset.plane === plane);
-  boxes.forEach(b => b.classList.toggle("on", b === target));
-  bands.forEach(b => b.classList.toggle("on", b.dataset.plane === plane));
+function show(i){
+  cur = i;
+  const e = EL[i], p = PLANES[e.plane];
+  boxes.forEach(b => b.classList.toggle("on", b.dataset.el === e.id));
+  bands.forEach(b => b.classList.toggle("on", b.dataset.plane === e.plane));
+  [...dots.children].forEach((d, j) => d.classList.toggle("on", j === i));
   $("p-num").textContent = p.n;
   $("p-title").textContent = p.t;
   $("p-en").textContent = p.en;
-  $("p-text").textContent = p.d;
-  $("p-vis").replaceChildren($("v-" + plane).content.cloneNode(true));
-  const i = ORDER.indexOf(plane);
+  $("p-el-es").textContent = e.es;
+  $("p-el-en").textContent = e.en;
+  $("p-text").textContent = e.d;
+  const v = $("v-" + (e.vis || e.id)).content.cloneNode(true);
+  if (e.hl) v.querySelector(".wf").classList.add("hl-" + e.hl);
+  $("p-vis").replaceChildren(v);
   $("prev").disabled = i === 0;
-  $("next").disabled = i === ORDER.length - 1;
+  $("next").disabled = i === EL.length - 1;
 }
 boxes.forEach(b => {
-  b.addEventListener("click", () => show(b.dataset.plane, b));
-  b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(b.dataset.plane, b); } });
+  const i = EL.findIndex(e => e.id === b.dataset.el);
+  b.addEventListener("click", () => show(i));
+  b.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); show(i); } });
 });
-$("prev").addEventListener("click", () => show(ORDER[ORDER.indexOf(cur) - 1]));
-$("next").addEventListener("click", () => show(ORDER[ORDER.indexOf(cur) + 1]));
-show("strategy");
+$("prev").addEventListener("click", () => show(cur - 1));
+$("next").addEventListener("click", () => show(cur + 1));
+show(0);
 </script>
 </body>
 </html>
